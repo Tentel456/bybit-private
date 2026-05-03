@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тест чата P2P</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    h2 {
+      margin-top: 0;
+      color: #1e2026;
+    }
+    
+    .btn {
+      background: #1e6bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 5px;
+    }
+    
+    .btn:hover {
+      background: #0d5ce6;
+    }
+    
+    .btn-secondary {
+      background: #76808f;
+    }
+    
+    .btn-secondary:hover {
+      background: #5a6473;
+    }
+    
+    .status {
+      padding: 10px;
+      border-radius: 4px;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+    
+    .status-connected {
+      background: #d4edda;
+      color: #155724;
+    }
+    
+    .status-disconnected {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    
+    .log {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #e1e8f0;
+      border-radius: 4px;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 12px;
+      background: #f8f9fa;
+      margin-top: 10px;
+    }
+    
+    .log-entry {
+      margin-bottom: 5px;
+      padding: 5px;
+      border-left: 3px solid #1e6bff;
+    }
+    
+    .log-entry-system {
+      border-left-color: #00c087;
+    }
+    
+    .log-entry-error {
+      border-left-color: #e74c3c;
+    }
+    
+    .input-group {
+      margin: 10px 0;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #e1e8f0;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    .chat-messages {
+      height: 200px;
+      overflow-y: auto;
+      border: 1px solid #e1e8f0;
+      border-radius: 4px;
+      padding: 10px;
+      margin: 10px 0;
+      background: white;
+    }
+    
+    .message {
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      max-width: 80%;
+    }
+    
+    .message-user {
+      background: #e8f4ff;
+      margin-left: auto;
+      text-align: right;
+    }
+    
+    .message-admin {
+      background: #f0f0f0;
+      margin-right: auto;
+    }
+    
+    .message-time {
+      font-size: 11px;
+      color: #76808f;
+      margin-top: 2px;
+    }
+    
+    .typing-indicator {
+      font-style: italic;
+      color: #1e6bff;
+      font-size: 13px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Панель пользователя -->
+    <div class="card">
+      <h2>Пользователь (order-room.html)</h2>
+      
+      <div class="input-group">
+        <label>ID пользователя:</label>
+        <input type="text" id="userId" value="user_123" readonly>
+      </div>
+      
+      <div class="input-group">
+        <label>Имя пользователя:</label>
+        <input type="text" id="userName" value="Иван Иванов">
+      </div>
+      
+      <div class="input-group">
+        <label>Данные оффера:</label>
+        <input type="text" id="offerName" value="Купить USDT за RUB">
+      </div>
+      
+      <div id="userStatus" class="status status-disconnected">Отключен</div>
+      
+      <button class="btn" onclick="connectUser()">Подключиться как пользователь</button>
+      <button class="btn btn-secondary" onclick="disconnectUser()">Отключиться</button>
+      
+      <div class="chat-messages" id="userChat">
+        <div class="message message-system">Чат будет отображаться здесь</div>
+      </div>
+      
+      <div class="input-group">
+        <input type="text" id="userMessage" placeholder="Введите сообщение..." onkeydown="if(event.key==='Enter') sendUserMessage()">
+        <button class="btn" onclick="sendUserMessage()">Отправить</button>
+      </div>
+      
+      <div id="userTyping" class="typing-indicator" style="display: none;">Админ печатает...</div>
+      
+      <div class="log" id="userLog">
+        <div class="log-entry log-entry-system">Готов к работе</div>
+      </div>
+    </div>
+    
+    <!-- Панель админа -->
+    <div class="card">
+      <h2>Админ (admin-chat.html)</h2>
+      
+      <div id="adminStatus" class="status status-disconnected">Отключен</div>
+      
+      <button class="btn" onclick="connectAdmin()">Подключиться как админ</button>
+      <button class="btn btn-secondary" onclick="disconnectAdmin()">Отключиться</button>
+      
+      <div id="adminChats">
+        <h3>Активные чаты:</h3>
+        <div id="chatsList">Нет активных чатов</div>
+      </div>
+      
+      <div class="chat-messages" id="adminChat">
+        <div class="message message-system">Выберите чат для переписки</div>
+      </div>
+      
+      <div class="input-group">
+        <input type="text" id="adminMessage" placeholder="Введите сообщение..." onkeydown="if(event.key==='Enter') sendAdminMessage()">
+        <button class="btn" onclick="sendAdminMessage()">Отправить</button>
+      </div>
+      
+      <div id="adminTyping" class="typing-indicator" style="display: none;">Пользователь печатает...</div>
+      
+      <div class="log" id="adminLog">
+        <div class="log-entry log-entry-system">Готов к работе</div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+  <script>
+    // Глобальные переменные
+    let userSocket = null;
+    let adminSocket = null;
+    let activeChatId = null;
+    let chats = {};
+    
+    // Логирование
+    function logUser(message, type = 'info') {
+      const logEl = document.getElementById('userLog');
+      const entry = document.createElement('div');
+      entry.className = `log-entry log-entry-${type}`;
+      entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      logEl.appendChild(entry);
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+    
+    function logAdmin(message, type = 'info') {
+      const logEl = document.getElementById('adminLog');
+      const entry = document.createElement('div');
+      entry.className = `log-entry log-entry-${type}`;
+      entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      logEl.appendChild(entry);
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+    
+    // Функции пользователя
+    function connectUser() {
+      if (userSocket) {
+        logUser('Уже подключен', 'error');
+        return;
+      }
+      
+      const socketUrl = 'http://127.0.0.1:5000';
+      const userId = document.getElementById('userId').value;
+      const userName = document.getElementById('userName').value;
+      const offerName = document.getElementById('offerName').value;
+      
+      userSocket = io(socketUrl, {
+        transports: ['websocket', 'polling'],
+        reconnection: true
+      });
+      
+      userSocket.on('connect', () => {
+        document.getElementById('userStatus').className = 'status status-connected';
+        document.getElementById('userStatus').textContent = 'Подключен';
+        logUser('Подключен к серверу');
+        
+        // Регистрируем пользователя в системе чатов
+        userSocket.emit('user_connect', {
+          userId: userId,
+          userName: userName,
+          userAvatar: userName[0] || 'U',
+          offerId: 'offer_' + Date.now(),
+          offerName: offerName,
+          amount: '10,000 RUB',
+          price: '78.50',
+          status: 'active',
+          createdAt: new Date().toISOString()
+        });
+        
+        logUser('Зарегистрирован в системе чатов');
+      });
+      
+      userSocket.on('chat_reply', (data) => {
+        const chatEl = document.getElementById('userChat');
+        const message = document.createElement('div');
+        message.className = 'message message-admin';
+        message.innerHTML = `
+          <div>${data.text || ''}</div>
+          <div class="message-time">${new Date().toLocaleTimeString()}</div>
+        `;
+        chatEl.appendChild(message);
+        chatEl.scrollTop = chatEl.scrollHeight;
+        logUser(`Получено сообщение от админа: ${data.text}`);
+      });
+      
+      userSocket.on('disconnect', () => {
+        document.getElementById('userStatus').className = 'status status-disconnected';
+        document.getElementById('userStatus').textContent = 'Отключен';
+        logUser('Отключен от сервера', 'error');
+      });
+      
+      logUser('Подключаюсь к серверу...');
+    }
+    
+    function disconnectUser() {
+      if (userSocket) {
+        userSocket.disconnect();
+        userSocket = null;
+        logUser('Отключение инициировано');
+      }
+    }
+    
+    function sendUserMessage() {
+      if (!userSocket || !userSocket.connected) {
+        logUser('Не подключен к серверу', 'error');
+        return;
+      }
+      
+      const inputEl = document.getElementById('userMessage');
+      const message = inputEl.value.trim();
+      
+      if (!message) return;
+      
+      const chatEl = document.getElementById('userChat');
+      const messageEl = document.createElement('div');
+      messageEl.className = 'message message-user';
+      messageEl.innerHTML = `
+        <div>${message}</div>
+        <div class="message-time">${new Date().toLocaleTimeString()}</div>
+      `;
+      chatEl.appendChild(messageEl);
+      chatEl.scrollTop = chatEl.scrollHeight;
+      
+      // Отправляем сообщение
+      userSocket.emit('chat_message', { text: message });
+      
+      // Отправляем индикатор печатания
+      userSocket.emit('user_typing', {});
+      setTimeout(() => {
+        if (userSocket && userSocket.connected) {
+          userSocket.emit('user_stop_typing', {});
+        }
+      }, 1000);
+      
+      inputEl.value = '';
+      logUser(`Отправлено сообщение: ${message}`);
+    }
+    
+    // Функции админа
+    function connectAdmin() {
+      if (adminSocket) {
+        logAdmin('Уже подключен', 'error');
+        return;
+      }
+      
+      const socketUrl = 'http://127.0.0.1:5000';
+      
+      adminSocket = io(socketUrl, {
+        transports: ['websocket', 'polling'],
+        reconnection: true
+      });
+      
+      adminSocket.on('connect', () => {
+        document.getElementById('adminStatus').className = 'status status-connected';
+        document.getElementById('adminStatus').textContent = 'Подключен';
+        logAdmin('Подключен к серверу как админ');
+        
+        // Регистрируем админа
+        adminSocket.emit('admin_connect');
+      });
+      
+      adminSocket.on('new_chat', (data) => {
+        logAdmin(`Новый чат: ${data.userName} - ${data.offerName}`);
+        
+        // Добавляем чат в список
+        chats[data.chatId] = data;
+        updateChatsList();
+        
+        // Если нет активного чата, выбираем этот
+        if (!activeChatId) {
+          selectChat(data.chatId);
+        }
+      });
+      
+      adminSocket.on('user_message', (data) => {
+        logAdmin(`Сообщение от ${data.userName}: ${data.text}`);
+        
+        // Если это активный чат, показываем сообщение
+        if (activeChatId === data.chatId) {
+          const chatEl = document.getElementById('adminChat');
+          const messageEl = document.createElement('div');
+          messageEl.className = 'message message-admin';
+          messageEl.innerHTML = `
+            <div><strong>${data.userName}:</strong> ${data.text}</div>
+            <div class="message-time">${new Date().toLocaleTimeString()}</div>
+          `;
+          chatEl.appendChild(messageEl);
+          chatEl.scrollTop = chatEl.scrollHeight;
+        }
+      });
+      
+      adminSocket.on('user_typing', (data) => {
+        if (activeChatId === data.chatId) {
+          document.getElementById('adminTyping').style.display = 'block';
+          document.getElementById('adminTyping').textContent = `${data.userName} печатает...`;
+        }
+      });
+      
+      adminSocket.on('user_stop_typing', (data) => {
+        if (activeChatId === data.chatId) {
+          document.getElementById('adminTyping').style.display = 'none';
+        }
+      });
+      
+      adminSocket.on('chat_closed', (data) => {
+        logAdmin(`Чат закрыт: ${data.userName} - ${data.reason}`);
+        delete chats[data.chatId];
+        updateChatsList();
+        
+        if (activeChatId === data.chatId) {
+          activeChatId = null;
+          document.getElementById('adminChat').innerHTML = '<div class="message message-system">Чат закрыт</div>';
+        }
+      });
+      
+      adminSocket.on('disconnect', () => {
+        document.getElementById('adminStatus').className = 'status status-disconnected';
+        document.getElementById('adminStatus').textContent = 'Отключен';
+        logAdmin('Отключен от сервера', 'error');
+      });
+      
+      logAdmin('Подключаюсь к серверу...');
+    }
+    
+    function disconnectAdmin() {
+      if (adminSocket) {
+        adminSocket.disconnect();
+        adminSocket = null;
+        logAdmin('Отключение инициировано');
+      }
+    }
+    
+    function updateChatsList() {
+      const chatsListEl = document.getElementById('chatsList');
+      const chatIds = Object.keys(chats);
+      
+      if (chatIds.length === 0) {
+        chatsListEl.innerHTML = 'Нет активных чатов';
+        return;
+      }
+      
+      let html = '<ul style="list-style: none; padding: 0;">';
+      chatIds.forEach(chatId => {
+        const chat = chats[chatId];
+        html += `
+          <li style="margin-bottom: 10px; padding: 10px; border: 1px solid #e1e8f0; border-radius: 4px; cursor: pointer; ${activeChatId === chatId ? 'background: #e8f4ff;' : ''}"
+              onclick="selectChat('${chatId}')">
+            <strong>${chat.userName}</strong><br>
+            <small>${chat.offerName}</small><br>
+            <small style="color: #76808f;">${new Date(chat.createdAt).toLocaleTimeString()}</small>
+          </li>
+        `;
+      });
+      html += '</ul>';
+      
+      chatsListEl.innerHTML = html;
+    }
+    
+    function selectChat(chatId) {
+      activeChatId = chatId;
+      const chat = chats[chatId];
+      
+      if (!chat) return;
+      
+      // Очищаем чат
+      const chatEl = document.getElementById('adminChat');
+      chatEl.innerHTML = `<div class="message message-system">Чат с ${chat.userName}</div>`;
+      
+      // Обновляем список
+      updateChatsList();
+      
+      logAdmin(`Выбран чат с ${chat.userName}`);
+    }
+    
+    function sendAdminMessage() {
+      if (!adminSocket || !adminSocket.connected) {
+        logAdmin('Не подключен к серверу', 'error');
+        return;
+      }
+      
+      if (!activeChatId) {
+        logAdmin('Не выбран активный чат', 'error');
+        return;
+      }
+      
+      const inputEl = document.getElementById('adminMessage');
+      const message = inputEl.value.trim();
+      
+      if (!message) return;
+      
+      const chat = chats[activeChatId];
+      const chatEl = document.getElementById('adminChat');
+      const messageEl = document.createElement('div');
+      messageEl.className = 'message message-user';
+      messageEl.innerHTML = `
+        <div><strong>Админ:</strong> ${message}</div>
+        <div class="message-time">${new Date().toLocaleTimeString()}</div>
+      `;
+      chatEl.appendChild(messageEl);
+      chatEl.scrollTop = chatEl.scrollHeight;
+      
+      // Отправляем сообщение
+      adminSocket.emit('admin_message', {
+        chatId: activeChatId,
+        userId: chat.userId,
+        text: message
+      });
+      
+      inputEl.value = '';
+      logAdmin(`Отправлено сообщение пользователю ${chat.userName}: ${message}`);
+    }
+    
+    // Инициализация
+    document.addEventListener('DOMContentLoaded', () => {
+      logUser('Тестовая панель пользователя готова');
+      logAdmin('Тестовая панель админа готова');
+    });
+  </script>
+</body>
+</html>

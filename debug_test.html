@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Отладка подключения чата</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    
+    h1, h2 {
+      margin-top: 0;
+      color: #1e2026;
+    }
+    
+    .status {
+      padding: 10px;
+      border-radius: 4px;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+    
+    .status-connected {
+      background: #d4edda;
+      color: #155724;
+    }
+    
+    .status-disconnected {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    
+    .status-error {
+      background: #fff3cd;
+      color: #856404;
+    }
+    
+    .log {
+      height: 200px;
+      overflow-y: auto;
+      border: 1px solid #e1e8f0;
+      border-radius: 4px;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 12px;
+      background: #f8f9fa;
+      margin-top: 10px;
+    }
+    
+    .log-entry {
+      margin-bottom: 5px;
+      padding: 5px;
+      border-left: 3px solid #1e6bff;
+    }
+    
+    .log-entry-system {
+      border-left-color: #00c087;
+    }
+    
+    .log-entry-error {
+      border-left-color: #e74c3c;
+    }
+    
+    .btn {
+      background: #1e6bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 5px;
+    }
+    
+    .btn:hover {
+      background: #0d5ce6;
+    }
+    
+    .btn-secondary {
+      background: #76808f;
+    }
+    
+    .btn-secondary:hover {
+      background: #5a6473;
+    }
+    
+    .test-section {
+      margin: 20px 0;
+      padding: 15px;
+      border: 1px solid #e1e8f0;
+      border-radius: 4px;
+    }
+    
+    .url-display {
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 12px;
+      margin: 10px 0;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Отладка подключения чата P2P</h1>
+      
+      <div class="test-section">
+        <h2>1. Проверка сервера</h2>
+        <button class="btn" onclick="testServerConnection()">Проверить подключение к серверу</button>
+        <div id="serverStatus" class="status status-disconnected">Не проверено</div>
+      </div>
+      
+      <div class="test-section">
+        <h2>2. Проверка URL подключения</h2>
+        <div class="url-display" id="urlDisplay">Загрузка...</div>
+        <button class="btn" onclick="checkUrls()">Проверить все URL</button>
+      </div>
+      
+      <div class="test-section">
+        <h2>3. Тест Socket.IO</h2>
+        <button class="btn" onclick="testSocketIO()">Тестировать Socket.IO подключение</button>
+        <div id="socketStatus" class="status status-disconnected">Не тестировано</div>
+      </div>
+      
+      <div class="test-section">
+        <h2>4. Проверка страниц</h2>
+        <button class="btn" onclick="openOrderRoom()">Открыть order-room.html</button>
+        <button class="btn" onclick="openAdminChat()">Открыть admin-chat.html</button>
+        <button class="btn btn-secondary" onclick="openTestChat()">Открыть test_chat.html</button>
+      </div>
+      
+      <div class="log" id="debugLog">
+        <div class="log-entry log-entry-system">Готов к отладке</div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+  <script>
+    let debugSocket = null;
+    
+    function logDebug(message, type = 'info') {
+      const logEl = document.getElementById('debugLog');
+      const entry = document.createElement('div');
+      entry.className = `log-entry log-entry-${type}`;
+      entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      logEl.appendChild(entry);
+      logEl.scrollTop = logEl.scrollHeight;
+      console.log(`[DEBUG] ${message}`);
+    }
+    
+    function updateStatus(elementId, status, message) {
+      const el = document.getElementById(elementId);
+      if (el) {
+        el.className = `status status-${status}`;
+        el.textContent = message;
+      }
+    }
+    
+    function testServerConnection() {
+      logDebug('Проверка подключения к серверу...');
+      updateStatus('serverStatus', 'disconnected', 'Проверка...');
+      
+      fetch('http://127.0.0.1:5000/health')
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error(`HTTP ${response.status}`);
+        })
+        .then(data => {
+          logDebug(`Сервер отвечает: ${JSON.stringify(data)}`, 'system');
+          updateStatus('serverStatus', 'connected', 'Сервер работает');
+        })
+        .catch(error => {
+          logDebug(`Ошибка подключения к серверу: ${error.message}`, 'error');
+          updateStatus('serverStatus', 'error', `Ошибка: ${error.message}`);
+        });
+    }
+    
+    function checkUrls() {
+      logDebug('Проверка URL подключения...');
+      
+      // Проверяем мета-тег
+      const meta = document.querySelector('meta[name="p2p-chat-socket-url"]');
+      const fromMeta = meta ? meta.getAttribute('content') : 'не найден';
+      
+      // Проверяем location
+      const hostname = location.hostname;
+      const origin = location.origin;
+      
+      const urls = {
+        'Мета-тег': fromMeta,
+        'Hostname': hostname,
+        'Origin': origin,
+        'Локальный URL': 'http://127.0.0.1:5000',
+        'Определенный URL': hostname === 'localhost' || hostname === '127.0.0.1' ? 
+                          'http://127.0.0.1:5000' : origin
+      };
+      
+      let html = '<strong>Доступные URL:</strong><br>';
+      for (const [name, url] of Object.entries(urls)) {
+        html += `${name}: <code>${url}</code><br>`;
+      }
+      
+      document.getElementById('urlDisplay').innerHTML = html;
+      logDebug('URL проверены', 'system');
+    }
+    
+    function testSocketIO() {
+      logDebug('Тестирование Socket.IO подключения...');
+      updateStatus('socketStatus', 'disconnected', 'Подключение...');
+      
+      if (debugSocket) {
+        debugSocket.disconnect();
+        debugSocket = null;
+      }
+      
+      const socketUrl = 'http://127.0.0.1:5000';
+      logDebug(`Подключаюсь к ${socketUrl}`);
+      
+      debugSocket = io(socketUrl, {
+        transports: ['websocket', 'polling'],
+        reconnection: false
+      });
+      
+      debugSocket.on('connect', () => {
+        logDebug('Socket.IO подключен успешно', 'system');
+        updateStatus('socketStatus', 'connected', 'Подключен к Socket.IO');
+        
+        // Тестируем отправку со��ытия
+        debugSocket.emit('test_event', { message: 'Тестовое сообщение' });
+        logDebug('Отправлено тестовое событие');
+      });
+      
+      debugSocket.on('connect_error', (error) => {
+        logDebug(`Ошибка подключения Socket.IO: ${error.message}`, 'error');
+        updateStatus('socketStatus', 'error', `Ошибка: ${error.message}`);
+      });
+      
+      debugSocket.on('disconnect', () => {
+        logDebug('Socket.IO отключен', 'system');
+        updateStatus('socketStatus', 'disconnected', 'Отключен');
+      });
+      
+      // Таймаут на случай если подключение не происходит
+      setTimeout(() => {
+        if (debugSocket && !debugSocket.connected) {
+          logDebug('Таймаут подключения Socket.IO', 'error');
+          updateStatus('socketStatus', 'error', 'Таймаут подключения');
+        }
+      }, 5000);
+    }
+    
+    function openOrderRoom() {
+      window.open('http://127.0.0.1:5000/order-room.html', '_blank');
+      logDebug('Открываю order-room.html');
+    }
+    
+    function openAdminChat() {
+      window.open('http://127.0.0.1:5000/admin-chat.html', '_blank');
+      logDebug('Открываю admin-chat.html');
+    }
+    
+    function openTestChat() {
+      window.open('http://127.0.0.1:5000/test_chat.html', '_blank');
+      logDebug('Открываю test_chat.html');
+    }
+    
+    // Инициализация
+    document.addEventListener('DOMContentLoaded', () => {
+      logDebug('Отладчик запущен', 'system');
+      checkUrls();
+      
+      // Автоматически проверяем сервер
+      setTimeout(() => {
+        testServerConnection();
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

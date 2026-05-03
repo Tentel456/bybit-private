@@ -1,0 +1,15 @@
+{
+  "enabled": true,
+  "featuredLabel": "Top Picks for New Users",
+  "offer": {
+    "name": "Crypto-Angel_01",
+    "orders": "12,319",
+    "completion": "100",
+    "price": "78,16",
+    "available": "10 500,6324",
+    "min": "70 000,00",
+    "max": "550 000,00",
+    "period": "15m",
+    "payments": ["Bank Transfer", "Mobile Top-up"]
+  }
+}

@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="p2p-chat-socket-url" content="http://127.0.0.1:5000">
+  <title>Bybit — Админ-чат P2P</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="main.css">
+  <style>
+    .admin-chat {
+      display: flex;
+      height: calc(100vh - 80px);
+      background: #f8f9fa;
+    }
+    
+    .admin-chat__sidebar {
+      width: 320px;
+      border-right: 1px solid #e1e8f0;
+      background: #fff;
+      overflow-y: auto;
+    }
+    
+    .admin-chat__main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+    
+    .admin-chat__header {
+      padding: 20px 24px;
+      border-bottom: 1px solid #e1e8f0;
+      background: #fff;
+    }
+    
+    .admin-chat__title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1e2026;
+      margin: 0 0 4px 0;
+    }
+    
+    .admin-chat__subtitle {
+      font-size: 14px;
+      color: #76808f;
+      margin: 0;
+    }
+    
+    .admin-chat__list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    
+    .admin-chat__item {
+      padding: 16px 20px;
+      border-bottom: 1px solid #f5f5f5;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .admin-chat__item:hover {
+      background: #f8f9fa;
+    }
+    
+    .admin-chat__item--active {
+      background: #e8f4ff;
+      border-left: 3px solid #1e6bff;
+    }
+    
+    .admin-chat__item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    
+    .admin-chat__item-user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .admin-chat__item-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #1e6bff;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .admin-chat__item-name {
+      font-weight: 600;
+      color: #1e2026;
+      font-size: 14px;
+    }
+    
+    .admin-chat__item-time {
+      font-size: 12px;
+      color: #76808f;
+    }
+    
+    .admin-chat__item-preview {
+      font-size: 13px;
+      color: #76808f;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    
+    .admin-chat__item-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 12px;
+      color: #76808f;
+    }
+    
+    .admin-chat__item-badge {
+      background: #1e6bff;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    
+    .admin-chat__item-typing {
+      color: #1e6bff;
+      font-size: 12px;
+      font-style: italic;
+    }
+    
+    .admin-chat__order-details {
+      padding: 20px 24px;
+      border-bottom: 1px solid #e1e8f0;
+      background: #f8f9fa;
+    }
+    
+    .admin-chat__order-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1e2026;
+      margin: 0 0 16px 0;
+    }
+    
+    .admin-chat__order-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    
+    .admin-chat__order-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .admin-chat__order-label {
+      font-size: 12px;
+      color: #76808f;
+    }
+    
+    .admin-chat__order-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: #1e2026;
+    }
+    
+    .admin-chat__messages {
+      flex: 1;
+      padding: 20px 24px;
+      overflow-y: auto;
+      background: #f8f9fa;
+    }
+    
+    .admin-chat__message {
+      margin-bottom: 16px;
+      display: flex;
+      gap: 12px;
+    }
+    
+    .admin-chat__message--admin {
+      flex-direction: row-reverse;
+    }
+    
+    .admin-chat__message-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #1e6bff;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    
+    .admin-chat__message-avatar--admin {
+      background: #00c087;
+    }
+    
+    .admin-chat__message-bubble {
+      max-width: 70%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: white;
+      border: 1px solid #e1e8f0;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    
+    .admin-chat__message--admin .admin-chat__message-bubble {
+      background: #e8f4ff;
+      border-color: #b3d4ff;
+    }
+    
+    .admin-chat__message-text {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.4;
+      color: #1e2026;
+    }
+    
+    .admin-chat__message-time {
+      font-size: 11px;
+      color: #76808f;
+      margin-top: 4px;
+      text-align: right;
+    }
+    
+    .admin-chat__message--admin .admin-chat__message-time {
+      text-align: left;
+    }
+    
+    .admin-chat__message-photo {
+      margin-bottom: 8px;
+    }
+    
+    .admin-chat__photo {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 8px;
+      display: block;
+    }
+    
+    .admin-chat__photo-caption {
+      font-size: 12px;
+      color: #76808f;
+      margin-top: 4px;
+    }
+    
+    .admin-chat__input-area {
+      padding: 20px 24px;
+      border-top: 1px solid #e1e8f0;
+      background: #fff;
+    }
+    
+    .admin-chat__input-wrapper {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    
+    .admin-chat__input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid #e1e8f0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    
+    .admin-chat__input:focus {
+      border-color: #1e6bff;
+    }
+    
+    .admin-chat__send-btn {
+      padding: 12px 24px;
+      background: #1e6bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .admin-chat__send-btn:hover {
+      background: #0d5ce6;
+    }
+    
+    .admin-chat__typing-indicator {
+      padding: 8px 24px;
+      font-size: 13px;
+      color: #76808f;
+      font-style: italic;
+      background: #f8f9fa;
+      border-top: 1px solid #e1e8f0;
+    }
+    
+    .admin-chat__empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 40px;
+      text-align: center;
+      color: #76808f;
+    }
+    
+    .admin-chat__empty-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+    
+    .admin-chat__empty-text {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+    
+    .admin-chat__empty-subtext {
+      font-size: 14px;
+    }
+    
+    .admin-chat__status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+    
+    .admin-chat__status--connected {
+      background: #d4edda;
+      color: #155724;
+    }
+    
+    .admin-chat__status--disconnected {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    
+    .admin-chat__status--error {
+      background: #fff3cd;
+      color: #856404;
+    }
+    
+    .admin-chat__status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    
+    .admin-chat__status--connected .admin-chat__status-dot {
+      background: #28a745;
+    }
+    
+    .admin-chat__status--disconnected .admin-chat__status-dot {
+      background: #dc3545;
+    }
+    
+    .admin-chat__status--error .admin-chat__status-dot {
+      background: #ffc107;
+    }
+  </style>
+</head>
+<body class="page">
+  <header class="header">
+    <div class="container header__container">
+      <div class="header__row">
+        <a class="header__logo logo" href="index.html" aria-label="Bybit">
+          <img class="logo__img" src="img/logo.svg" width="87" height="34" alt="Bybit">
+        </a>
+        <div class="header__mid">
+          <nav class="header__nav nav" aria-label="Main">
+            <ul class="nav__list">
+              <li class="nav__item">
+                <a class="nav__link" href="index.html">Главная</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="orders.html">Ордера</a>
+              </li>
+              <li class="nav__item nav__item--active">
+                <a class="nav__link" href="admin-chat.html">Админ-чат</a>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="profile.html">Профиль</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="header__grow"></div>
+        <div class="header__actions actions">
+          <button class="actions__avatar" type="button" aria-label="Профиль">
+            <img class="actions__avatar-img" src="img/user-icon.svg" width="28" height="28" alt="" aria-hidden="true">
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <div class="admin-chat">
+        <!-- Боковая панель со списком чатов -->
+        <aside class="admin-chat__sidebar">
+          <div class="admin-chat__header">
+            <h1 class="admin-chat__title">Активные чаты</h1>
+            <p class="admin-chat__subtitle">Всего: <span id="adminChatsCount">0</span></p>
+            <div id="connectionStatus" class="admin-chat__status admin-chat__status--disconnected">
+              <span class="admin-chat__status-dot"></span>
+              <span class="admin-chat__status-text">Отключен</span>
+            </div>
+            <button id="testAddChat" style="margin-top: 10px; padding: 5px 10px; font-size: 12px; background: #00c087; color: white; border: none; border-radius: 3px; cursor: pointer;">
+              + Тестовый чат
+            </button>
+          </div>
+          
+          <ul class="admin-chat__list" id="adminChatsList">
+            <!-- Чаты будут добавляться динамически -->
+            <div class="admin-chat__empty-state" id="adminChatsEmpty">
+              <div class="admin-chat__empty-icon">💬</div>
+              <p class="admin-chat__empty-text">Нет активных чатов</p>
+              <p class="admin-chat__empty-subtext">Когда пользователи начнут переписку, чаты появятся здесь</p>
+            </div>
+          </ul>
+        </aside>
+        
+        <!-- Основная область с деталями сделки и чатом -->
+        <div class="admin-chat__main" id="adminChatMain" style="display: none;">
+          <!-- Детали сделки -->
+          <div class="admin-chat__order-details" id="adminOrderDetails">
+            <h2 class="admin-chat__order-title">Детали сделки</h2>
+            <div class="admin-chat__order-grid">
+              <div class="admin-chat__order-field">
+                <span class="admin-chat__order-label">Пользователь</span>
+                <span class="admin-chat__order-value" id="adminOrderUser">—</span>
+              </div>
+              <div class="admin-chat__order-field">
+                <span class="admin-chat__order-label">Оффер</span>
+                <span class="admin-chat__order-value" id="adminOrderOffer">—</span>
+              </div>
+              <div class="admin-chat__order-field">
+                <span class="admin-chat__order-label">Сумма</span>
+                <span class="admin-chat__order-value" id="adminOrderAmount">—</span>
+              </div>
+              <div class="admin-chat__order-field">
+                <span class="admin-chat__order-label">Цена</span>
+                <span class="admin-chat__order-value" id="adminOrderPrice">—</span>
+              </div>
+              <div class="admin-chat__order-field">
+                <span class="admin-chat__order-label">Статус</span>
+                <span class="admin-chat__order-value" id="adminOrderStatus">—</span>
+              </div>
+              <div class="admin-chat__order-field">
+                <span class="admin-chat__order-label">Время создания</span>
+                <span class="admin-chat__order-value" id="adminOrderTime">—</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Область сообщений -->
+          <div class="admin-chat__messages" id="adminChatMessages">
+            <!-- Сообщения будут добавляться динамически -->
+            <div class="admin-chat__empty-state">
+              <div class="admin-chat__empty-icon">💬</div>
+              <p class="admin-chat__empty-text">Выберите чат для начала переписки</p>
+            </div>
+          </div>
+          
+          <!-- Индикатор "пользователь печатает" -->
+          <div class="admin-chat__typing-indicator" id="adminTypingIndicator" style="display: none;">
+            <span id="adminTypingText">Пользователь печатает...</span>
+          </div>
+          
+          <!-- Поле ввода сообщения -->
+          <div class="admin-chat__input-area">
+            <div class="admin-chat__input-wrapper">
+              <input type="text" class="admin-chat__input" id="adminChatInput" placeholder="Введите сообщение..." autocomplete="off">
+              <button type="button" class="admin-chat__attach-btn" id="adminChatAttach" title="Прикрепить фото">
+                📎
+              </button>
+              <button type="button" class="admin-chat__send-btn" id="adminChatSend">Отправить</button>
+              <input type="file" id="adminChatPhotoInput" accept="image/*" style="display: none;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+  <script>
+    // Глобальные переменные
+    let adminSocket = null;
+    let activeChatId = null;
+    let activeUserId = null;
+    let chats = new Map(); // Map для хранения чатов: chatId -> {user, offer, messages, typing}
+    
+    // Инициализация Socket.IO для админа
+    function initAdminSocket() {
+      const socketUrl = document.querySelector('meta[name="p2p-chat-socket-url"]')?.getAttribute('content') || 
+                       (location.hostname === 'localhost' || location.hostname === '127.0.0.1' ? 
+                        'http://127.0.0.1:5000' : location.origin);
+      
+      adminSocket = io(socketUrl, {
+        transports: ['websocket', 'polling'],
+        reconnection: true
+      });
+      
+      adminSocket.on('connect', () => {
+        console.log('Админ подключен к чату');
+        adminSocket.emit('admin_connect');
+        updateConnectionStatus('connected', 'Подключен к серверу чата');
+      });
+      
+      adminSocket.on('disconnect', () => {
+        console.log('Админ отключен от чата');
+        updateConnectionStatus('disconnected', 'Отключен от сервера');
+      });
+      
+      adminSocket.on('connect_error', (error) => {
+        console.error('Ошибка подключения:', error);
+        updateConnectionStatus('error', `Ошибка: ${error.message}`);
+      });
+      
+      adminSocket.on('new_chat', (data) => {
+        console.log('Получен new_chat:', data);
+        addOrUpdateChat(data);
+      });
+      
+      adminSocket.on('user_message', (data) => {
+        console.log('Сообщение от пользователя:', data);
+        handleUserMessage(data);
+      });
+      
+      adminSocket.on('user_typing', (data) => {
+        console.log('Пользователь печатает:', data);
+        handleUserTyping(data);
+      });
+      
+      adminSocket.on('user_stop_typing', (data) => {
+        console.log('Пользователь перестал печатать:', data);
+        handleUserStopTyping(data);
+      });
+      
+      adminSocket.on('chat_closed', (data) => {
+        console.log('Чат закрыт:', data);
+        removeChat(data.chatId);
+      });
+    }
+    
+    // Добавление или обновление чата в списке
+    function addOrUpdateChat(chatData) {
+      console.log('addOrUpdateChat вызвана с данными:', chatData);
+      
+      const chatId = chatData.chatId || chatData.userId;
+      if (!chatId) {
+        console.error('Нет chatId в данных:', chatData);
+        return;
+      }
+      
+      const existingChat = chats.get(chatId);
+      console.log('Существующий чат:', existingChat);
+      
+      const chat = existingChat || {
+        id: chatId,
+        userId: chatData.userId,
+        userName: chatData.userName || `User${chatData.userId}`,
+        userAvatar: chatData.userAvatar || 'U',
+        offerId: chatData.offerId,
+        offerName: chatData.offerName || 'Оффер',
+        amount: chatData.amount || '0',
+        price: chatData.price || '0',
+        status: chatData.status || 'active',
+        createdAt: chatData.createdAt || new Date().toISOString(),
+        messages: [],
+        unread: 0,
+        typing: false,
+        lastMessage: chatData.lastMessage || '',
+        lastMessageTime: chatData.lastMessageTime || new Date().toISOString()
+      };
+      
+      // Обновляем данные, если они есть
+      if (chatData.lastMessage) {
+        chat.lastMessage = chatData.lastMessage;
+        chat.lastMessageTime = chatData.lastMessageTime || new Date().toISOString();
+      }
+      
+      if (chatData.userName) chat.userName = chatData.userName;
+      if (chatData.offerName) chat.offerName = chatData.offerName;
+      if (chatData.status) chat.status = chatData.status;
+      
+      chats.set(chatId, chat);
+      renderChatsList();
+      
+      // Если это новый чат и нет активного, выбираем его
+      if (!activeChatId && !existingChat) {
+        selectChat(chatId);
+      }
+    }
+    
+    // Обработка сообщения от пользователя
+    function handleUserMessage(data) {
+      console.log('handleUserMessage вызвана с данными:', data);
+      
+      const chatId = data.chatId || data.userId;
+      if (!chatId) {
+        console.error('Нет chatId в данных:', data);
+        return;
+      }
+      
+      const chat = chats.get(chatId);
+      if (!chat) {
+        console.log('Чат не найден, создаю новый...');
+        // Если чата нет, создаем его
+        addOrUpdateChat({
+          chatId,
+          userId: data.userId,
+          userName: data.userName || `User${data.userId}`,
+          lastMessage: data.text,
+          lastMessageTime: new Date().toISOString()
+        });
+        return;
+      }
+      
+      // Добавляем сообщение в историю
+      const message = {
+        id: Date.now(),
+        text: data.text,
+        sender: 'user',
+        time: new Date().toISOString(),
+        timestamp: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' }),
+        type: data.type || 'text',
+        imageData: data.imageData,
+        fileName: data.fileName,
+        fileType: data.fileType
+      };
+      
+      chat.messages.push(message);
+      
+      // Для текстовых сообщений обрезаем превью
+      if (data.type === 'text') {
+        chat.lastMessage = data.text.length > 50 ? data.text.substring(0, 50) + '...' : data.text;
+      } else if (data.type === 'image') {
+        chat.lastMessage = `[Фото: ${data.fileName || 'photo.jpg'}]`;
+      } else {
+        chat.lastMessage = data.text.length > 50 ? data.text.substring(0, 50) + '...' : data.text;
+      }
+      
+      chat.lastMessageTime = new Date().toISOString();
+      
+      // Увеличиваем счетчик непрочитанных, если чат не активный
+      if (activeChatId !== chatId) {
+        chat.unread++;
+      }
+      
+      chats.set(chatId, chat);
+      renderChatsList();
+      
+      // Если активный чат - обновляем сообщения
+      if (activeChatId === chatId) {
+        renderChatMessages(chat);
+        adminSocket.emit('message_received', { chatId });
+      }
+    }
+    
+    // Обработка индикатора печатания
+    function handleUserTyping(data) {
+      const chatId = data.chatId || data.userId;
+      if (!chatId) return;
+      
+      const chat = chats.get(chatId);
+      if (!chat) return;
+      
+      chat.typing = true;
+      chats.set(chatId, chat);
+      
+      // Если это активный чат, показываем индикатор
+      if (activeChatId === chatId) {
+        showTypingIndicator(chat.userName);
+      }
+    }
+    
+    // Обработка остановки печатания
+    function handleUserStopTyping(data) {
+      const chatId = data.chatId || data.userId;
+      if (!chatId) return;
+      
+      const chat = chats.get(chatId);
+      if (!chat) return;
+      
+      chat.typing = false;
+      chats.set(chatId, chat);
+      
+      // Если это активный чат, скрываем индикатор
+      if (activeChatId === chatId) {
+        hideTypingIndicator();
+      }
+    }
+    
+    // Удаление чата
+    function removeChat(chatId) {
+      chats.delete(chatId);
+      
+      // Если удаляем активный чат, сбрасываем активный чат
+      if (activeChatId === chatId) {
+        activeChatId = null;
+        document.getElementById('adminChatMain').style.display = 'none';
+        document.getElementById('adminChatMessages').innerHTML = `
+          <div class="admin-chat__empty-state">
+            <div class="admin-chat__empty-icon">💬</div>
+            <p class="admin-chat__empty-text">Выберите чат для начала переписки</p>
+          </div>
+        `;
+      }
+      
+      renderChatsList();
+    }
+    
+    // Рендеринг списка чатов
+    function renderChatsList() {
+      console.log('renderChatsList вызвана, chats:', chats.size);
+      
+      const listEl = document.getElementById('adminChatsList');
+      const countEl = document.getElementById('adminChatsCount');
+      
+      console.log('Элементы:', { listEl, countEl });
+      
+      if (!listEl || !countEl) {
+        console.error('Не найдены элементы для рендеринга списка чатов!');
+        return;
+      }
+      
+      const chatArray = Array.from(chats.values());
+      countEl.textContent = chatArray.length;
+      
+      // Находим или создаем элемент emptyEl
+      let emptyEl = document.getElementById('adminChatsEmpty');
+      if (!emptyEl) {
+        // Если элемент не найден, возможно он был перемещен или удален
+        // Проверяем, не находится ли он внутри listEl
+        emptyEl = listEl.querySelector('#adminChatsEmpty');
+        if (!emptyEl) {
+          // Создаем новый элемент
+          emptyEl = document.createElement('div');
+          emptyEl.id = 'adminChatsEmpty';
+          emptyEl.className = 'admin-chat__empty-state';
+          emptyEl.innerHTML = `
+            <div class="admin-chat__empty-icon">💬</div>
+            <p class="admin-chat__empty-text">Нет активных чатов</p>
+            <p class="admin-chat__empty-subtext">Когда пользователи начнут переписку, чаты появятся здесь</p>
+          `;
+        }
+      }
+      
+      if (chatArray.length === 0) {
+        emptyEl.style.display = 'flex';
+        listEl.innerHTML = '';
+        listEl.appendChild(emptyEl);
+        return;
+      }
+      
+      emptyEl.style.display = 'none';
+      
+      // Сортируем по времени последнего сообщения (новые сверху)
+      chatArray.sort((a, b) => new Date(b.lastMessageTime) - new Date(a.lastMessageTime));
+      
+      const html = chatArray.map(chat => {
+        // Безопасно экранируем ID для использования в onclick
+        const safeChatId = escapeHtml(chat.id).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        return `
+        <li class="admin-chat__item ${activeChatId === chat.id ? 'admin-chat__item--active' : ''}" 
+            data-chat-id="${safeChatId}" onclick="window.selectChat('${safeChatId}')">
+          <div class="admin-chat__item-header">
+            <div class="admin-chat__item-user">
+              <div class="admin-chat__item-avatar" style="background: #1e6bff;">
+                ${escapeHtml(chat.userAvatar)}
+              </div>
+              <span class="admin-chat__item-name">${escapeHtml(chat.userName)}</span>
+            </div>
+            <span class="admin-chat__item-time">${formatTime(chat.lastMessageTime)}</span>
+          </div>
+          <div class="admin-chat__item-preview">${escapeHtml(chat.lastMessage)}</div>
+          <div class="admin-chat__item-meta">
+            <span>Оффер: ${escapeHtml(chat.offerName)}</span>
+            ${chat.unread > 0 ? `<span class="admin-chat__item-badge">${chat.unread}</span>` : ''}
+            ${chat.typing ? '<span class="admin-chat__item-typing">печатает...</span>' : ''}
+          </div>
+        </li>
+      `}).join('');
+      
+      listEl.innerHTML = html;
+    }
+    
+    // Выбор чата
+    window.selectChat = function(chatId) {
+      console.log('selectChat вызвана с chatId:', chatId);
+      
+      const chat = chats.get(chatId);
+      if (!chat) {
+        console.error('Чат не найден:', chatId);
+        return;
+      }
+      
+      activeChatId = chatId;
+      activeUserId = chat.userId;
+      
+      // Сбрасываем счетчик непрочитанных
+      chat.unread = 0;
+      chats.set(chatId, chat);
+      
+      // Обновляем UI
+      renderChatsList();
+      renderOrderDetails(chat);
+      renderChatMessages(chat);
+      
+      // Показываем основную область
+      const mainEl = document.getElementById('adminChatMain');
+      if (mainEl) {
+        mainEl.style.display = 'flex';
+        console.log('Основная область показана');
+      } else {
+        console.error('Элемент adminChatMain не найден!');
+      }
+      
+      // Скрываем индикатор печатания, если он был
+      hideTypingIndicator();
+      
+      // Если пользователь печатает, показываем индикатор
+      if (chat.typing) {
+        showTypingIndicator(chat.userName);
+      }
+    }
+    
+    // Рендеринг деталей сделки
+    function renderOrderDetails(chat) {
+      document.getElementById('adminOrderUser').textContent = chat.userName;
+      document.getElementById('adminOrderOffer').textContent = chat.offerName;
+      document.getElementById('adminOrderAmount').textContent = chat.amount;
+      document.getElementById('adminOrderPrice').textContent = chat.price;
+      document.getElementById('adminOrderStatus').textContent = chat.status === 'active' ? 'Активен' : 'Завершен';
+      document.getElementById('adminOrderTime').textContent = formatDateTime(chat.createdAt);
+    }
+    
+    // Рендеринг сообщений чата
+    function renderChatMessages(chat) {
+      const messagesEl = document.getElementById('adminChatMessages');
+      if (!messagesEl) return;
+      
+      if (chat.messages.length === 0) {
+        messagesEl.innerHTML = `
+          <div class="admin-chat__empty-state">
+            <div class="admin-chat__empty-icon">💬</div>
+            <p class="admin-chat__empty-text">Нет сообщений</p>
+            <p class="admin-chat__empty-subtext">Начните переписку с пользователем</p>
+          </div>
+        `;
+        return;
+      }
+      
+      const html = chat.messages.map(msg => {
+        let contentHtml = '';
+        
+        if (msg.type === 'image' && msg.imageData) {
+          contentHtml = `
+            <div class="admin-chat__message-photo">
+              <img src="${msg.imageData}" alt="${escapeHtml(msg.fileName || 'Фото')}" class="admin-chat__photo">
+              <div class="admin-chat__photo-caption">${escapeHtml(msg.fileName || 'Фото')}</div>
+            </div>
+          `;
+        } else {
+          contentHtml = `<p class="admin-chat__message-text">${escapeHtml(msg.text)}</p>`;
+        }
+        
+        return `
+        <div class="admin-chat__message ${msg.sender === 'admin' ? 'admin-chat__message--admin' : ''}">
+          <div class="admin-chat__message-avatar ${msg.sender === 'admin' ? 'admin-chat__message-avatar--admin' : ''}">
+            ${msg.sender === 'admin' ? 'A' : chat.userAvatar}
+          </div>
+          <div class="admin-chat__message-bubble">
+            ${contentHtml}
+            <div class="admin-chat__message-time">${msg.timestamp}</div>
+          </div>
+        </div>
+      `;
+      }).join('');
+      
+      messagesEl.innerHTML = html;
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+    
+    // Показать индикатор "пользователь печатает"
+    function showTypingIndicator(userName) {
+      const indicatorEl = document.getElementById('adminTypingIndicator');
+      const textEl = document.getElementById('adminTypingText');
+      
+      if (indicatorEl && textEl) {
+        textEl.textContent = `${userName} печатает...`;
+        indicatorEl.style.display = 'block';
+      }
+    }
+    
+    // Скрыть индикатор "пользователь печатает"
+    function hideTypingIndicator() {
+      const indicatorEl = document.getElementById('adminTypingIndicator');
+      if (indicatorEl) {
+        indicatorEl.style.display = 'none';
+      }
+    }
+    
+    // Отправка сообщения от админа
+    function sendAdminMessage() {
+      const inputEl = document.getElementById('adminChatInput');
+      if (!inputEl || !activeChatId) return;
+      
+      const text = inputEl.value.trim();
+      if (!text) return;
+      
+      const chat = chats.get(activeChatId);
+      if (!chat) return;
+      
+      // Добавляем сообщение в историю
+      const message = {
+        id: Date.now(),
+        text: text,
+        sender: 'admin',
+        time: new Date().toISOString(),
+        timestamp: new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })
+      };
+      
+      chat.messages.push(message);
+      chat.lastMessage = text.length > 50 ? text.substring(0, 50) + '...' : text;
+      chat.lastMessageTime = new Date().toISOString();
+      
+      chats.set(activeChatId, chat);
+      
+      // Отправляем сообщение через сокет
+      if (adminSocket && adminSocket.connected) {
+        adminSocket.emit('admin_message', {
+          chatId: activeChatId,
+          userId: chat.userId,
+          text: text
+        });
+      }
+      
+      // Обновляем UI
+      renderChatsList();
+      renderChatMessages(chat);
+      
+      // Очищаем поле ввода
+      inputEl.value = '';
+      inputEl.focus();
+    }
+    
+    // Функция обновления статуса подключения
+    function updateConnectionStatus(status, message) {
+      const statusEl = document.getElementById('connectionStatus');
+      if (!statusEl) return;
+      
+      statusEl.className = `admin-chat__status admin-chat__status--${status}`;
+      const textEl = statusEl.querySelector('.admin-chat__status-text');
+      if (textEl) {
+        textEl.textContent = message;
+      }
+      
+      console.log(`Статус подключения: ${status} - ${message}`);
+    }
+    
+    // Вспомогательные функции
+    function escapeHtml(text) {
+      if (text == null) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+    
+    function formatTime(isoString) {
+      const date = new Date(isoString);
+      const now = new Date();
+      const diffMs = now - date;
+      const diffMins = Math.floor(diffMs / 60000);
+      
+      if (diffMins < 1) return 'только что';
+      if (diffMins < 60) return `${diffMins} мин назад`;
+      if (diffMins < 1440) return `${Math.floor(diffMins / 60)} ч назад`;
+      
+      return date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' });
+    }
+    
+    function formatDateTime(isoString) {
+      const date = new Date(isoString);
+      return date.toLocaleString('ru-RU', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+    
+    // Инициализация при загрузке страницы
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM загружен, проверяю элементы...');
+      
+      // Проверяем существование критических элементов
+      const criticalElements = [
+        'adminChatsList', 'adminChatsEmpty', 'adminChatsCount',
+        'adminChatMain', 'adminChatMessages', 'adminChatInput',
+        'adminChatSend', 'adminOrderDetails'
+      ];
+      
+      criticalElements.forEach(id => {
+        const el = document.getElementById(id);
+        console.log(`Элемент ${id}:`, el ? 'найден' : 'НЕ НАЙДЕН!');
+      });
+      
+      initAdminSocket();
+      
+      // Обработчики событий
+      document.getElementById('adminChatSend')?.addEventListener('click', sendAdminMessage);
+      
+      document.getElementById('adminChatInput')?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendAdminMessage();
+        }
+      });
+      
+      // Добавляем обработчик для тестовой кнопки
+      document.getElementById('testAddChat')?.addEventListener('click', () => {
+        console.log('Добавляю тестовый чат...');
+        addOrUpdateChat({
+          chatId: 'test_' + Date.now(),
+          userId: 'test_user_' + Date.now(),
+          userName: 'Тестовый пользователь',
+          userAvatar: 'Т',
+          offerId: 'offer_test',
+          offerName: 'Тестовый оффер',
+          amount: '10,000 RUB',
+          price: '78.50',
+          status: 'active',
+          lastMessage: 'Тестовое сообщение',
+          lastMessageTime: new Date().toISOString()
+        });
+      });
+      
+      // Тестовые данные для демонстрации
+      setTimeout(() => {
+        if (chats.size === 0) {
+          addOrUpdateChat({
+            chatId: 'test1',
+            userId: 'user123',
+            userName: 'Иван Иванов',
+            userAvatar: 'И',
+            offerId: 'offer_001',
+            offerName: 'Купить USDT за RUB',
+            amount: '10,000 RUB',
+            price: '78.50',
+            status: 'active',
+            lastMessage: 'Здравствуйте, хочу купить USDT',
+            lastMessageTime: new Date().toISOString()
+          });
+          
+          addOrUpdateChat({
+            chatId: 'test2',
+            userId: 'user456',
+            userName: 'Мария Петрова',
+            userAvatar: 'М',
+            offerId: 'offer_002',
+            offerName: 'Продать BTC за RUB',
+            amount: '0.1 BTC',
+            price: '3,450,000',
+            status: 'active',
+            lastMessage: 'Когда будет готов перевод?',
+            lastMessageTime: new Date(Date.now() - 300000).toISOString()
+          });
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

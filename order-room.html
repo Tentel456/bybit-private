@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="p2p-chat-socket-url" content="http://127.0.0.1:5000">
+  <title>Bybit — P2P</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="main.css">
+  
+</head>
+<body class="page">
+  <header class="header">
+    <div class="container header__container">
+      <div class="header__row">
+        <a class="header__logo logo" href="index.html" aria-label="Bybit">
+          <img class="logo__img" src="img/logo.svg" width="87" height="34" alt="Bybit">
+        </a>
+        <div class="header__mid">
+          <nav class="header__nav nav" aria-label="Main">
+            <ul class="nav__list">
+              <li class="nav__item nav__item--dropdown">
+                <span class="nav__trigger">
+                  <span class="nav__label">Купить криптовалюту</span>
+                  <svg class="nav__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <div class="nav__dropdown dropdown dropdown--buy">
+                  <div class="dropdown__panel">
+                    <div class="dropdown__list">
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-1-logo-1.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">P2P торговля (0% комиссии)<span class="dropdown__row-fire"><img class="dropdown__row-fire-img" src="img/logo-fire.svg" width="14" height="14" alt=""></span></span><span class="dropdown__row-desc">Более 60 фиатных валют, различные популярные местные способы оплаты и лучшие цены</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-1-logo-2.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Покупка в один клик</span><span class="dropdown__row-desc">Покупайте криптовалюту за секунды</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-1-logo-3.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Депозит в фиатной валюте</span><span class="dropdown__row-desc">Пополните баланс банковской картой или банковским переводом</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-1-logo-4.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Конвертация<span class="dropdown__row-fire"><img class="dropdown__row-fire-img" src="img/logo-fire.svg" width="14" height="14" alt=""></span></span><span class="dropdown__row-desc">Быстрая конвертация с нулевыми комиссиями без проскальзывания</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-1-logo-5.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Ввод криптовалюты</span><span class="dropdown__row-desc">Моментальные криптовалютные депозиты на спотовый аккаунт</span></span></a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="nav__item">
+                <a class="nav__link" href="#">Рынки</a>
+              </li>
+              <li class="nav__item nav__item--dropdown">
+                <span class="nav__trigger">
+                  <span class="nav__label">Торговать</span>
+                  <svg class="nav__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <div class="nav__dropdown dropdown dropdown--trade">
+                  <div class="dropdown__panel">
+                    <div class="dropdown__list">
+                      <p class="dropdown__section-title">Trading</p>
+                      <a class="dropdown__row dropdown__row--with-arrow" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-2-logo-1.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Трейдинг-портал</span><span class="dropdown__row-desc">Новые торговые возможности</span></span></a>
+                      <a class="dropdown__row dropdown__row--with-arrow" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-2-logo-2.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Спот</span><span class="dropdown__row-desc">Сделки на спотовом рынке с кредитным плечом до 10x</span></span><span class="dropdown__row-arrow" aria-hidden="true">›</span></a>
+                      <a class="dropdown__row dropdown__row--with-arrow" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-2-logo-3.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Маржинальная торговля</span><span class="dropdown__row-desc">Инвестируйте с заёмными средствами и повышайте доход</span></span><span class="dropdown__row-arrow" aria-hidden="true">›</span></a>
+                      <a class="dropdown__row dropdown__row--with-arrow" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-2-logo-4.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Alpha <span class="dropdown__row-chip">NEW</span></span><span class="dropdown__row-desc">Удобная ончейн-торговля и прибыль</span></span><span class="dropdown__row-arrow" aria-hidden="true">›</span></a>
+                      <a class="dropdown__row dropdown__row--with-arrow" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-2-logo-5.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Фьючерсы</span><span class="dropdown__row-desc">Торгуйте бессрочными и фьючерсными контрактами с расчётами в USDT, USDC или других криптовалютах</span></span><span class="dropdown__row-arrow" aria-hidden="true">›</span></a>
+                      <a class="dropdown__row dropdown__row--with-arrow" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-2-logo-6.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Опционы<span class="dropdown__row-fire"><img class="dropdown__row-fire-img" src="img/logo-fire.svg" width="14" height="14" alt=""></span></span><span class="dropdown__row-desc">Опционные контракты с расчётом в USDT</span></span><span class="dropdown__row-arrow" aria-hidden="true">›</span></a>
+                      <p class="dropdown__section-title">Explore</p>
+                      <a class="dropdown__row dropdown__row--with-arrow" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-2-logo-7.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">TradFi</span><span class="dropdown__row-desc">Торгуйте валютными парами, товарами и CFD на акции на единой платформе</span></span><span class="dropdown__row-arrow" aria-hidden="true">›</span></a>
+                      <a class="dropdown__row dropdown__row--with-arrow" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-2-logo-8.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Spot X</span><span class="dropdown__row-desc">Launchpool, Token Splash, Puzzle Hunt, ByVotes и многое другое</span></span><span class="dropdown__row-arrow" aria-hidden="true">›</span></a>
+                      <a class="dropdown__row dropdown__row--with-arrow" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-2-logo-9.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">RFQ</span><span class="dropdown__row-desc">Исполняйте многоуровневые блоки как единую сделку</span></span></a>
+                      <a class="dropdown__row dropdown__row--with-arrow" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-2-logo-10.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Торговля спредами</span><span class="dropdown__row-desc">Получайте прибыль от спредов с абсолютной точностью</span></span></a>
+                      <a class="dropdown__row dropdown__row--with-arrow" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-2-logo-11.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Премаркет-торговля</span><span class="dropdown__row-desc">Изучите возможности премаркет-торговли</span></span></a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="nav__item nav__item--dropdown">
+                <span class="nav__trigger">
+                  <span class="nav__label">Инструменты</span>
+                  <svg class="nav__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <div class="nav__dropdown dropdown">
+                  <div class="dropdown__panel">
+                    <div class="dropdown__list">
+                      <a class="dropdown__row dropdown__row--with-arrow" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-3-logo-1.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Копитрейдинг<span class="dropdown__row-fire"><img class="dropdown__row-fire-img" src="img/logo-fire.svg" width="14" height="14" alt=""></span></span><span class="dropdown__row-desc">Топовые трейдеры будут торговать в ваших интересах!</span></span><span class="dropdown__row-arrow" aria-hidden="true">›</span></a>
+                      <a class="dropdown__row dropdown__row--with-arrow" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-3-logo-2.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">TradeGPT <span class="dropdown__row-chip">NEW</span></span><span class="dropdown__row-desc">Трейдинг на базе ИИ</span></span><span class="dropdown__row-arrow" aria-hidden="true">›</span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-3-logo-3.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Торговый бот</span><span class="dropdown__row-desc">Еще более удобный трейдинг</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-3-logo-4.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Лидерборд</span><span class="dropdown__row-desc">Доступ к разнообразным торговым инструментам для ещё более результативного трейдинга</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-3-logo-5.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">TradingView <span class="dropdown__row-chip">NEW</span></span><span class="dropdown__row-desc">Переходите на новый уровень криптовалютного трейдинга - используйте лучшие инструменты для графиков и аналитики</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-3-logo-6.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Конструктор позиций</span><span class="dropdown__row-desc">Условный PnL комбинаций с бессрочными, фьючерсными контрактами или опционами до размещения ордеров</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-3-logo-7.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Демо трейдинг<span class="dropdown__row-fire"><img class="dropdown__row-fire-img" src="img/logo-fire.svg" width="14" height="14" alt=""></span></span><span class="dropdown__row-desc">Попробуйте заняться трейдингом, не рискуя собственным капиталом</span></span></a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="nav__item nav__item--dropdown">
+                <span class="nav__trigger">
+                  <span class="nav__label">Банкинг</span>
+                  <svg class="nav__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <div class="nav__dropdown dropdown dropdown--align-end">
+                  <div class="dropdown__panel">
+                    <div class="dropdown__list">
+                      <a class="dropdown__row dropdown__row--with-arrow" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-4-logo-1.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Earn</span><span class="dropdown__row-desc">Удобный доступ для увеличения криптопортфеля</span></span><span class="dropdown__row-arrow" aria-hidden="true">›</span></a>
+                      <a class="dropdown__row dropdown__row--with-arrow" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-4-logo-2.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Продвинутый Earn</span><span class="dropdown__row-desc">Высокая доходность даже в условиях волатильности</span></span><span class="dropdown__row-arrow" aria-hidden="true">›</span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-4-logo-3.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Криптозаймы</span><span class="dropdown__row-desc">Криптозаймы с высоким LTV и погашением в удобное время.</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-4-logo-4.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Маржинальный стейкинг SOL</span><span class="dropdown__row-desc">Увеличивайте ончейн-награды за стейкинг SOL с помощью маржинальных займов!</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-4-logo-5.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Card</span><span class="dropdown__row-desc">Платите криптовалютой мгновенно и по всему миру</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-4-logo-6.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Bybit Pay<span class="dropdown__row-fire"><img class="dropdown__row-fire-img" src="img/logo-fire.svg" width="14" height="14" alt=""></span></span><span class="dropdown__row-desc">Повсеместная оплата от Bybit</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-4-logo-7.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Внебиржевой трейдинг</span><span class="dropdown__row-desc">Крупные ордера, конкурентные цены, мгновенные расчёты</span></span></a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="nav__item nav__item--dropdown">
+                <span class="nav__trigger">
+                  <span class="nav__label">Подробнее</span>
+                  <svg class="nav__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                <div class="nav__dropdown dropdown dropdown--more dropdown--align-end">
+                  <div class="dropdown__panel">
+                    <div class="dropdown__list">
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-5-logo-1.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">VIP-программа <span class="dropdown__row-chip">NEW</span></span><span class="dropdown__row-desc">Эксклюзивный доступ к скидкам на комиссии и многое другое</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-5-logo-2.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Livestream</span><span class="dropdown__row-desc">Смотрите эфиры и получайте эйрдропы</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-5-logo-3.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Новый взгляд на Mantle</span><span class="dropdown__row-desc">MNT Pass на Bybit — уникальные бонусы</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-5-logo-4.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Bybit AI Hub</span><span class="dropdown__row-desc">Выходите за рамки возможного — откройте новые горизонты с ИИ</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-5-logo-5.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Кошелек</span><span class="dropdown__row-desc">Все монеты и сети в одном кошельке</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-5-logo-6.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">B2B-услуги</span><span class="dropdown__row-desc">Банковское обслуживание. Блокчейн. Два в одном.</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-5-logo-7.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Институциональные сервисы</span><span class="dropdown__row-desc">Скидки на комиссии, инвестиционные решения и другие возможности</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-5-logo-8.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Реферальная программа</span><span class="dropdown__row-desc">Приглашайте друзей и получайте более 1720 USDT и 30% комиссионных на споте, деривативах, в копитрейдинге и карте Bybit</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-5-logo-9.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Партнерская программа<span class="dropdown__row-fire"><img class="dropdown__row-fire-img" src="img/logo-fire.svg" width="14" height="14" alt=""></span></span><span class="dropdown__row-desc">Пользуйтесь персональными предложениями, расширяйте аудиторию и зарабатывайте до 50% комиссионных в качестве партнера Bybit</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-5-logo-10.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Брокерская программа</span><span class="dropdown__row-desc">Участвуйте и получайте скидки до 50% в течение трех месяцев</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-5-logo-11.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Исламский аккаунт</span><span class="dropdown__row-desc">Аккаунт без процентного дохода соответствует нормам шариата и идеально подходит трейдерам-мусульманам.</span></span></a>
+                      <a class="dropdown__row" href="#"><span class="dropdown__row-icon"><img class="dropdown__row-icon-img" src="img/dropmenu-5-logo-12.svg" width="24" height="24" alt=""></span><span class="dropdown__row-body"><span class="dropdown__row-title">Справочный центр</span><span class="dropdown__row-desc">По всем вопросам о продуктах обращайтесь в нашу Службу поддержки</span></span></a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="nav__item nav__item--mnt">
+                <a class="nav__link nav__mnt-link" href="#" aria-label="MNT">
+                  <img class="nav__mnt-logo" src="img/logo-mnt.svg" width="58" height="20" alt="MNT">
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="header__search search" role="search">
+            <svg class="search__icon" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 2.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9zM1 7a6 6 0 1110.74 3.26l3.85 3.85a.75.75 0 11-1.06 1.06l-3.85-3.85A6 6 0 011 7z" fill="currentColor"/></svg>
+            <input class="search__input" type="search" placeholder="🔥MNT/USDT" autocomplete="off" aria-label="Поиск">
+          </div>
+        </div>
+        <div class="header__grow"></div>
+        <div class="header__actions actions">
+          <a class="actions__signup" href="#">Внести</a>
+          <a class="actions__login actions__link actions__link--dropdown" href="#">Активы<span class="actions__chevron" aria-hidden="true"><img class="actions__chevron-icon" src="assets/icon-chevron-down.svg" width="10" height="10" alt=""></span></a>
+          <a class="actions__login actions__link actions__orders actions__link--dropdown" href="#">ОРДЕРА<span class="actions__chevron" aria-hidden="true"><img class="actions__chevron-icon" src="assets/icon-chevron-down.svg" width="10" height="10" alt=""></span></a>
+          <button class="actions__avatar" type="button" aria-label="Профиль">
+            <img class="actions__avatar-img" src="img/user-icon.svg" width="28" height="28" alt="" aria-hidden="true">
+          </button>
+          <button class="actions__icon-btn actions__notify" type="button" aria-label="Уведомления">
+            <img class="actions__icon-img" src="img/notifications-logo.svg" width="20" height="20" alt="" aria-hidden="true">
+            <span class="actions__badge">1</span>
+          </button>
+          <div class="actions__download-wrap">
+            <button class="actions__icon-btn actions__download-btn" type="button" aria-label="Download">
+              <img class="actions__icon-img actions__icon-img--download" src="img/download-logo.svg" width="20" height="20" alt="" aria-hidden="true">
+            </button>
+            <div class="actions__download-menu">
+              <img class="actions__download-qr" src="img/qr-code.png" width="150" height="150" alt="QR код приложения Bybit">
+              <p class="actions__download-title">Скачать приложение</p>
+              <a class="actions__download-link" href="#">Больше вариантов для загрузки</a>
+            </div>
+          </div>
+          <button class="actions__icon-btn" type="button" aria-label="Language">
+            <img class="actions__icon-img" src="img/world-logo.svg" width="20" height="20" alt="" aria-hidden="true">
+          </button>
+          <button class="header__burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenuPanel">
+            <span class="header__burger-line"></span>
+            <span class="header__burger-line"></span>
+            <span class="header__burger-line"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="header__fabs" aria-label="Быстрые действия">
+      <button type="button" class="mobile-menu__fab-alarm" id="mobileMenuAlarmFab" aria-label="Оповещения"><img class="mobile-menu__fab-alarm-icon" src="img/alarm-logo.svg" width="20" height="20" alt="" aria-hidden="true"></button>
+      <button type="button" class="mobile-menu__support" id="mobileMenuSupport" aria-label="Поддержка"><img class="mobile-menu__support-icon" src="img/support-logo.svg" width="26" height="26" alt="" aria-hidden="true"></button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <button class="mobile-menu__backdrop" type="button" aria-label="Закрыть меню"></button>
+    <aside class="mobile-menu__panel" id="mobileMenuPanel" role="dialog" aria-modal="true" aria-label="Мобильное меню">
+      <button class="mobile-menu__close" type="button" aria-label="Закрыть меню">✕</button>
+      <div class="mobile-menu__chrome">
+        <div class="mobile-menu__profile">
+          <img class="mobile-menu__avatar" src="img/user-icon.svg" width="48" height="48" alt="">
+          <div class="mobile-menu__profile-meta">
+            <div class="mobile-menu__profile-row">
+              <span class="mobile-menu__email">yrg***@****</span>
+              <span class="mobile-menu__badge">Основной аккаунт</span>
+            </div>
+            <div class="mobile-menu__uid-row">
+              <span class="mobile-menu__uid" id="mobileMenuUid">UID: 437653585</span>
+              <button type="button" class="mobile-menu__copy-uid" id="mobileMenuCopyUid" aria-label="Копировать UID">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 4v12a2 2 0 002 2h8a2 2 0 002-2V7.5L14.5 4H8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 4v4h4M6 8H5a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="mobile-menu__recent">
+          <div class="mobile-menu__recent-label">Недавно использовавшийся</div>
+          <div class="mobile-menu__recent-name">salvatore</div>
+          <a class="mobile-menu__account-cta" href="#">
+            <span class="mobile-menu__account-cta-text">Перейти/создать аккаунт</span>
+            <img class="mobile-menu__cta-arrow" src="img/arrow-right.svg" width="12" height="10" alt="" aria-hidden="true">
+          </a>
+        </div>
+        <div class="mobile-menu__quick">
+          <button type="button" class="mobile-menu__quick-btn">
+            <img class="mobile-menu__quick-icon" src="img/download-orange-bot-logo.svg" width="16" height="16" alt="" aria-hidden="true">
+            Внести
+          </button>
+          <button type="button" class="mobile-menu__quick-btn">
+            <img class="mobile-menu__quick-icon" src="img/download-orange-top-logo.svg" width="16" height="16" alt="" aria-hidden="true">
+            Вывести
+          </button>
+        </div>
+        <div class="mobile-menu__chrome-divider" role="presentation"></div>
+      </div>
+      <nav class="mobile-menu__nav" aria-label="Мобильная навигация">
+        <ul class="mobile-menu__list" id="mobileMenuNav"></ul>
+      </nav>
+      <ul class="mobile-menu__presets" aria-label="Быстрые ссылки">
+        <li>
+          <a class="mobile-menu__preset mobile-menu__preset--notify" href="#">
+            <span class="mobile-menu__preset-label">Уведомление</span>
+            <span class="mobile-menu__preset-icon-wrap" aria-hidden="true">
+              <img class="mobile-menu__preset-icon" src="img/notifications-logo.svg" width="22" height="22" alt="">
+              <span class="mobile-menu__preset-badge">1</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="mobile-menu__preset" href="#">
+            <span class="mobile-menu__preset-label mobile-menu__preset-label--caps">АКТИВЫ</span>
+            <svg class="mobile-menu__preset-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+        <li>
+          <a class="mobile-menu__preset" href="#">
+            <span class="mobile-menu__preset-label mobile-menu__preset-label--caps">ОРДЕРА</span>
+            <svg class="mobile-menu__preset-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </li>
+      </ul>
+      <div class="mobile-menu__logout-row">
+        <a class="mobile-menu__logout" href="#">Выйти</a>
+      </div>
+      <div class="mobile-menu__footer">
+        <a class="mobile-menu__lang" href="#" aria-label="Выбрать язык">
+          <img src="img/world-logo.svg" width="20" height="20" alt="" aria-hidden="true">
+          <span>Русский</span>
+        </a>
+        <a class="mobile-menu__download" href="#">
+          <img src="img/download-logo.svg" width="18" height="18" alt="" aria-hidden="true">
+          <span>Загрузить приложение</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+
+  <main class="main">
+    <div class="subnav">
+      <div class="container subnav__container">
+        <div class="subnav__left">
+          <a class="subnav__link subnav__link--active" href="#" data-subnav="p2p">P2P</a>
+          <a class="subnav__link" href="#" data-subnav="crypto-dep">Криптовалютный депозит</a>
+          <a class="subnav__link" href="#" data-subnav="one-click">Покупка в один клик</a>
+          <a class="subnav__link" href="#" data-subnav="block">Блок</a>
+          <a class="subnav__link" href="#" data-subnav="fiat">Фиатный депозит</a>
+          <a class="subnav__link" href="#" data-subnav="recurring">Recurring Buy</a>
+          <a class="subnav__link" href="#" data-subnav="card">Bybit Card</a>
+          <a class="subnav__link" href="#" data-subnav="convert">Конвертация</a>
+        </div>
+        <div class="subnav__right">
+          <div class="subnav__dropdown-wrap">
+            <button type="button" class="subnav__dropdown-trigger" aria-expanded="false" aria-haspopup="true" id="subnavGuideBtn">
+              Руководство <span class="subnav__util-arrow">▾</span>
+            </button>
+            <div class="subnav__dropdown-panel" role="menu" aria-labelledby="subnavGuideBtn">
+              <a href="#" class="subnav__dropdown-link" role="menuitem">Видеоурок</a>
+              <a href="#" class="subnav__dropdown-link" role="menuitem">P2P руководство</a>
+            </div>
+          </div>
+          <div class="subnav__dropdown-wrap">
+            <button type="button" class="subnav__dropdown-trigger" aria-expanded="false" aria-haspopup="true" id="subnavAdsBtn">
+              Объявления <span class="subnav__util-arrow">▾</span>
+            </button>
+            <div class="subnav__dropdown-panel" role="menu" aria-labelledby="subnavAdsBtn">
+              <a href="#" class="subnav__dropdown-link" role="menuitem">Подать объявление</a>
+              <a href="#" class="subnav__dropdown-link" role="menuitem">Мои объявления</a>
+            </div>
+          </div>
+          <a class="subnav__util subnav__util--orders" href="orders.html" id="subnavOrdersLink">
+            <span class="subnav__util-orders-text">Ордеры</span>
+            <span class="subnav__orders-badge" id="subnavOrdersBadge" hidden aria-hidden="true"></span>
+          </a>
+          <a class="subnav__util" href="#">P2P центр пользователя</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="p2p">
+      <div class="container p2p__container">
+        <div class="p2p-market-view" id="p2pMarketView" hidden aria-hidden="true">
+
+        <h1 class="p2p__title" id="p2pTitle">Купить USDT за EUR через P2P</h1>
+
+        <div class="p2p-slider" id="p2pSlider">
+          <button type="button" class="p2p-slider__arrow p2p-slider__arrow--prev" id="sliderPrev" aria-label="Предыдущий слайд">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <div class="p2p-slider__track" id="sliderTrack">
+            <div class="p2p-slider__slide">
+              <div class="p2p-slider__body">
+                <p class="p2p-slider__title">Bybit Flat Spring Blossom</p>
+                <div class="p2p-slider__desc-row">
+                  <p class="p2p-slider__desc">Депозит, торгуйте и делитесь призовым фондом 18 500 USDT</p>
+                  <button type="button" class="p2p-slider__cta" aria-label="Подробнее">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                </div>
+              </div>
+              <img class="p2p-slider__img" src="img/slider-img-1.png" alt="Bybit Flat Spring Blossom">
+            </div>
+
+            <div class="p2p-slider__slide">
+              <div class="p2p-slider__body">
+                <p class="p2p-slider__title">Фиатный приветственный оффер</p>
+                <div class="p2p-slider__desc-row">
+                  <p class="p2p-slider__desc">Новые пользователи: внесите $100+ на Bybit и получите 10 USDT эйрдроп!</p>
+                  <button type="button" class="p2p-slider__cta" aria-label="Подробнее">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </button>
+                </div>
+              </div>
+              <img class="p2p-slider__img" src="img/slider-img-2.png" alt="Фиатный приветственный оффер">
+            </div>
+          </div>
+
+          <button type="button" class="p2p-slider__arrow p2p-slider__arrow--next" id="sliderNext" aria-label="Следующий слайд">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <div class="p2p-slider__dots" id="sliderDots">
+            <button type="button" class="p2p-slider__dot p2p-slider__dot--active" data-slide="0" aria-label="Слайд 1"></button>
+            <button type="button" class="p2p-slider__dot" data-slide="1" aria-label="Слайд 2"></button>
+          </div>
+        </div>
+
+        <div class="p2p-tabs">
+          <div class="p2p-tabs__buysell">
+            <button type="button" class="p2p-tabs__bs p2p-tabs__bs--active buy-active" data-side="buy">Купить</button>
+            <button type="button" class="p2p-tabs__bs p2p-tabs__bs--sell" data-side="sell">Продать</button>
+          </div>
+          <div class="p2p-tabs__divider"></div>
+          <div class="p2p-tabs__coins">
+            <button type="button" class="p2p-tabs__coin p2p-tabs__coin--active p2p-tabs__coin--primary" data-coin="USDT">USDT</button>
+            <button type="button" class="p2p-tabs__coin p2p-tabs__coin--primary" data-coin="BTC">BTC</button>
+            <button type="button" class="p2p-tabs__coin p2p-tabs__coin--primary" data-coin="ETH">ETH</button>
+            <button type="button" class="p2p-tabs__coin p2p-tabs__coin--primary" data-coin="USDC">USDC</button>
+            <div class="p2p-tabs__divider"></div>
+            <button type="button" class="p2p-tabs__coin p2p-tabs__coin--primary" data-coin="L3">L3</button>
+            <button type="button" class="p2p-tabs__coin" data-coin="TON">TON</button>
+            <button type="button" class="p2p-tabs__coin" data-coin="TRX">TRX</button>
+            <button type="button" class="p2p-tabs__coin" data-coin="DRIFT">DRIFT</button>
+            <button type="button" class="p2p-tabs__coin" data-coin="TRUMP">TRUMP  <img src="img/logo-fire.svg" width="13" height="13" alt=""></button>
+            <a class="p2p-tabs__more" href="#"><span class="p2p-tabs__more-top">Поддержка </span><span class="p2p-tabs__more-bot">300+ монет ›</span></a>
+          </div>
+        </div>
+
+        <div class="p2p-filters">
+          <div class="p2p-filters__input-wrap">
+            <input class="p2p-filters__input" id="amountInput" type="text" placeholder="Введите сумму" autocomplete="off">
+            <div class="p2p-filters__currency" id="currencySelect" data-value="RUB">
+              <span class="p2p-currency-menu__badge" id="currencyBadge" style="background:#84BD7B;"><img src="img/rub-logo.svg" width="18" height="18" alt="₽" style="display:block;"></span>
+              <span id="currencyLabel">RUB</span>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+          <div class="p2p-filters__select p2p-filters__select--pill" id="paymentSelect" data-value="all">
+            <span id="paymentLabel">Все способы оплаты</span>
+            <svg class="p2p-filters__select-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="p2p-filters__select p2p-filters__select--pill" id="refreshSelect">
+            <img class="p2p-filters__refresh-icon" id="refreshIcon" src="img/refresh-logo.svg" width="16" height="16" alt="" style="display:none;">
+            <span id="refreshLabel">Настройки обновления</span>
+            <svg class="p2p-filters__select-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <button type="button" class="p2p-filters__filter-btn p2p-filters__filter-btn--orange" id="filterBtn">
+            Фильтр
+            <span class="p2p-filters__filter-icon-wrap">
+              <img src="img/filter-logo.svg" width="16" height="16" alt="" aria-hidden="true">
+              <span class="p2p-filters__filter-badge" id="filterDot">1</span>
+            </span>
+          </button>
+        </div>
+
+        <div class="p2p-table-wrap">
+          <div class="p2p-warn">
+            <img class="p2p-warn__icon" src="img/megaphone-logo.svg" width="16" height="16" alt="" aria-hidden="true">
+            <div class="p2p-warn__ticker-wrap">
+              <div class="p2p-warn__ticker">
+                <span class="p2p-warn__ticker-text">Never chat outside the platform, as chat history may be removed. Stay vigilant against impersonators and scammers. Do not share personal contact details, such as phone numbers or email addresses. Always verify information independently and do not rely on screenshots. Bybit never escrows any fiat or cryptocurrency on behalf of users. Do not engage in violations such as third-party or split payments. <a href="#" class="p2p-warn__link">Click to read more &gt;&gt;&gt;</a></span>
+                <span class="p2p-warn__ticker-text" aria-hidden="true">Never chat outside the platform, as chat history may be removed. Stay vigilant against impersonators and scammers. Do not share personal contact details, such as phone numbers or email addresses. Always verify information independently and do not rely on screenshots. Bybit never escrows any fiat or cryptocurrency on behalf of users. Do not engage in violations such as third-party or split payments. <a href="#" class="p2p-warn__link">Click to read more &gt;&gt;&gt;</a></span>
+              </div>
+            </div>
+          </div>
+          <div class="p2p-table">
+            <div class="p2p-table__head">
+              <span class="p2p-table__th">Рекламодатель</span>
+              <span class="p2p-table__th">Цена</span>
+              <span class="p2p-table__th">Доступно / Лимиты</span>
+              <span class="p2p-table__th">Способ оплаты</span>
+              <span class="p2p-table__th"></span>
+            </div>
+            <div class="p2p-table__body" id="tableBody">
+
+              <div class="p2p-table__row p2p-table__row--featured">
+                <span class="p2p-table__featured-label">Top Picks for New Users <img src="img/question-logo.svg" width="14" height="14" alt="" style="vertical-align:middle;flex-shrink:0;"></span>
+                <div class="p2p-table__cell p2p-table__cell--user">
+                  <div class="p2p-table__avatar" style="background:#000">C</div>
+                  <div class="p2p-table__user-info">
+                    <span class="p2p-table__username">Crypto-Angel <img src="img/verify-logo.png" width="15" height="15" style="vertical-align:middle;flex-shrink:0;" alt=""> <img src="img/advertiser-logo.png" width="15" height="15" style="vertical-align:middle;flex-shrink:0;" alt=""></span>
+                    <span class="p2p-table__stats">34,527 Order(s) &nbsp;|&nbsp; 100%</span>
+                    <span class="p2p-table__time">
+                      <span class="p2p-table__time-icon" data-time="15m">
+                        <img src="img/timer-logo.svg" width="14" height="14" alt="">
+                        <span class="p2p-table__time-tooltip">The advertiser requires you to complete the payment within 15 minutes after placing the order. After completing the payment, please click "I have completed the payment" to mark the order as paid. If you do not complete the process on time, the order will be automatically canceled.</span>
+                      </span>
+                      15m
+                    </span>
+                  </div>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--price">
+                  <span class="p2p-table__price">80,29</span>
+                  <span class="p2p-table__currency">RUB</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--limits">
+                  <span class="p2p-table__available">67,7258 USDT</span>
+                  <span class="p2p-table__limits">5000,00 ~ 5000,00 RUB</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--payment">
+                  <span class="p2p-table__payment-method">Mobile Top-up</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--action">
+                  <button type="button" class="p2p-table__buy-btn" data-coin="USDT" data-user="Crypto-Angel">Buy USDT</button>
+                </div>
+              </div>
+
+              <div class="p2p-table__row">
+                <div class="p2p-table__cell p2p-table__cell--user">
+                  <div class="p2p-table__avatar" style="background:#000">C</div>
+                  <div class="p2p-table__user-info">
+                    <span class="p2p-table__username">Crypto-Angel <img src="img/verify-logo.png" width="15" height="15" style="vertical-align:middle;flex-shrink:0;" alt=""> <img src="img/advertiser-logo.png" width="15" height="15" style="vertical-align:middle;flex-shrink:0;" alt=""></span>
+                    <span class="p2p-table__stats">34,527 Order(s) &nbsp;|&nbsp; 100%</span>
+                    <span class="p2p-table__time">
+                      <span class="p2p-table__time-icon" data-time="15m">
+                        <img src="img/timer-logo.svg" width="14" height="14" alt="">
+                        <span class="p2p-table__time-tooltip">The advertiser requires you to complete the payment within 15 minutes after placing the order. After completing the payment, please click "I have completed the payment" to mark the order as paid. If you do not complete the process on time, the order will be automatically canceled.</span>
+                      </span>
+                      15m
+                    </span>
+                  </div>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--price">
+                  <span class="p2p-table__price">78,78</span>
+                  <span class="p2p-table__currency">RUB</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--limits">
+                  <span class="p2p-table__available">33,9816 USDT</span>
+                  <span class="p2p-table__limits">500,00 ~ 505,00 RUB</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--payment">
+                  <span class="p2p-table__payment-method">Bank Transfer</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--action">
+                  <button type="button" class="p2p-table__buy-btn" data-coin="USDT" data-user="Crypto-Angel">Buy USDT</button>
+                </div>
+              </div>
+
+              <div class="p2p-table__row">
+                <div class="p2p-table__cell p2p-table__cell--user">
+                  <div class="p2p-table__avatar" style="background:#000">Д</div>
+                  <div class="p2p-table__user-info">
+                    <span class="p2p-table__username">Дед_Мазай <img src="img/advertiser-logo.png" width="15" height="15" style="vertical-align:middle;flex-shrink:0;" alt=""></span>
+                    <span class="p2p-table__stats">6,871 Order(s) &nbsp;|&nbsp; 99%</span>
+                    <span class="p2p-table__time">
+                      <span class="p2p-table__time-icon" data-time="60m">
+                        <img src="img/timer-logo.svg" width="14" height="14" alt="">
+                        <span class="p2p-table__time-tooltip">The advertiser requires you to complete the payment within 60 minutes after placing the order. After completing the payment, please click "I have completed the payment" to mark the order as paid. If you do not complete the process on time, the order will be automatically canceled.</span>
+                      </span>
+                      60m
+                    </span>
+                  </div>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--price">
+                  <span class="p2p-table__price">79,19</span>
+                  <span class="p2p-table__currency">RUB</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--limits">
+                  <span class="p2p-table__available">25,0000 USDT</span>
+                  <span class="p2p-table__limits">1824,00 ~ 1824,00 RUB</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--payment">
+                  <span class="p2p-table__payment-method">Cash in Person</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--action">
+                  <button type="button" class="p2p-table__buy-btn" data-coin="USDT" data-user="Дед_Мазай">Buy USDT</button>
+                </div>
+              </div>
+
+              <div class="p2p-table__row">
+                <div class="p2p-table__cell p2p-table__cell--user">
+                  <div class="p2p-table__avatar" style="background:#000">K</div>
+                  <div class="p2p-table__user-info">
+                    <span class="p2p-table__username">KriptoPotter <img src="img/verify-logo.png" width="15" height="15" style="vertical-align:middle;flex-shrink:0;" alt=""> <img src="img/briliant-logo.svg" width="14" height="14" style="vertical-align:middle;flex-shrink:0;" alt=""></span>
+                    <span class="p2p-table__stats">12,319 Order(s) &nbsp;|&nbsp; 100%</span>
+                    <span class="p2p-table__time">
+                      <span class="p2p-table__time-icon" data-time="60m">
+                        <img src="img/timer-logo.svg" width="14" height="14" alt="">
+                        <span class="p2p-table__time-tooltip">The advertiser requires you to complete the payment within 60 minutes after placing the order. After completing the payment, please click "I have completed the payment" to mark the order as paid. If you do not complete the process on time, the order will be automatically canceled.</span>
+                      </span>
+                      60m
+                    </span>
+                  </div>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--price">
+                  <span class="p2p-table__price">79,40</span>
+                  <span class="p2p-table__currency">RUB</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--limits">
+                  <span class="p2p-table__available">10 339,6324 USDT</span>
+                  <span class="p2p-table__limits">500 000,00 ~ 500 000,00 RUB</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--payment">
+                  <span class="p2p-table__payment-method">Mobile Top-up</span>
+                  <span class="p2p-table__payment-method">Cash Deposit to Bank</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--action">
+                  <button type="button" class="p2p-table__buy-btn" data-coin="USDT" data-user="KriptoPotter">Buy USDT</button>
+                </div>
+              </div>
+
+              <div class="p2p-table__row">
+                <div class="p2p-table__cell p2p-table__cell--user">
+                  <div class="p2p-table__avatar" style="background:#000">B</div>
+                  <div class="p2p-table__user-info">
+                    <span class="p2p-table__username">Bvolegrad <img src="img/advertiser-logo.png" width="15" height="15" style="vertical-align:middle;flex-shrink:0;" alt=""></span>
+                    <span class="p2p-table__stats">5,192 Order(s) &nbsp;|&nbsp; 99%</span>
+                    <span class="p2p-table__time">
+                      <span class="p2p-table__time-icon" data-time="15m">
+                        <img src="img/timer-logo.svg" width="14" height="14" alt="">
+                        <span class="p2p-table__time-tooltip">The advertiser requires you to complete the payment within 15 minutes after placing the order. After completing the payment, please click "I have completed the payment" to mark the order as paid. If you do not complete the process on time, the order will be automatically canceled.</span>
+                      </span>
+                      15m
+                    </span>
+                  </div>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--price">
+                  <span class="p2p-table__price">79,50</span>
+                  <span class="p2p-table__currency">RUB</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--limits">
+                  <span class="p2p-table__available">400,0000 USDT</span>
+                  <span class="p2p-table__limits">1000,00 ~ 19 000,00 RUB</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--payment">
+                  <span class="p2p-table__payment-method">Cash Deposit to Bank</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--action">
+                  <button type="button" class="p2p-table__buy-btn" data-coin="USDT" data-user="Bvolegrad">Buy USDT</button>
+                </div>
+              </div>
+
+              <div class="p2p-table__row">
+                <div class="p2p-table__cell p2p-table__cell--user">
+                  <div class="p2p-table__avatar" style="background:#000">#</div>
+                  <div class="p2p-table__user-info">
+                    <span class="p2p-table__username">#MONEY_MUNCH <img src="img/advertiser-logo.png" width="15" height="15" style="vertical-align:middle;flex-shrink:0;" alt=""></span>
+                    <span class="p2p-table__stats">348 Order(s) &nbsp;|&nbsp; 98%</span>
+                    <span class="p2p-table__time">
+                      <span class="p2p-table__time-icon" data-time="30m">
+                        <img src="img/timer-logo.svg" width="14" height="14" alt="">
+                        <span class="p2p-table__time-tooltip">The advertiser requires you to complete the payment within 30 minutes after placing the order. After completing the payment, please click "I have completed the payment" to mark the order as paid. If you do not complete the process on time, the order will be automatically canceled.</span>
+                      </span>
+                      30m
+                    </span>
+                  </div>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--price">
+                  <span class="p2p-table__price">79,60</span>
+                  <span class="p2p-table__currency">RUB</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--limits">
+                  <span class="p2p-table__available">9,0000 USDT</span>
+                  <span class="p2p-table__limits">547,00 ~ 547,00 RUB</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--payment">
+                  <span class="p2p-table__payment-method">Cash in Person</span>
+                  <span class="p2p-table__payment-method">Bank Transfer</span>
+                </div>
+                <div class="p2p-table__cell p2p-table__cell--action">
+                  <button type="button" class="p2p-table__buy-btn" data-coin="USDT" data-user="#MONEY_MUNCH">Buy USDT</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="p2p-pagination" id="p2pPagination">
+            <button class="p2p-pagination__btn p2p-pagination__prev" data-page="prev" aria-label="Предыдущая">&#8249;</button>
+            <button class="p2p-pagination__btn p2p-pagination__active" data-page="1">1</button>
+            <button class="p2p-pagination__btn" data-page="2">2</button>
+            <button class="p2p-pagination__btn" data-page="3">3</button>
+            <button class="p2p-pagination__btn" data-page="4">4</button>
+            <button class="p2p-pagination__btn" data-page="5">5</button>
+            <button class="p2p-pagination__btn p2p-pagination__next" data-page="next" aria-label="Следующая">&#8250;</button>
+          </div>
+
+        </div>
+        </div>
+
+        <div class="p2p-seller-profile" id="p2pSellerProfile" hidden aria-hidden="true">
+          <div class="p2p-seller-profile__hero">
+            <div class="p2p-seller-profile__hero-top">
+              <div class="p2p-seller-profile__avatar p2p-seller-profile__avatar--online" id="sellerProfileAvatar">D</div>
+              <div class="p2p-seller-profile__hero-main">
+                <div class="p2p-seller-profile__name-row">
+                  <span class="p2p-seller-profile__name" id="sellerProfileName">—</span>
+                  <a href="#" class="p2p-seller-profile__link-action" id="sellerProfileBlockLink">Заблокировать</a>
+                  <span class="p2p-seller-profile__link-sep" aria-hidden="true"></span>
+                  <a href="#" class="p2p-seller-profile__link-action" id="sellerProfileReportLink">Подать жалобу</a>
+                </div>
+                <div class="p2p-seller-profile__verifs" id="sellerProfileVerifs"></div>
+                <p class="p2p-seller-profile__online" id="sellerProfileOnline">Онлайн</p>
+              </div>
+              <button type="button" class="p2p-seller-profile__subscribe" id="sellerProfileSubscribe">
+                <svg class="p2p-seller-profile__subscribe-star" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l2.9 6.62L22 9.27l-5 4.9L18.18 22 12 18.77 5.82 22 7 14.17l-5-4.9 7.1-.65L12 2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                Подписаться
+              </button>
+            </div>
+
+            <div class="p2p-seller-profile__stats-wrap">
+              <div class="p2p-seller-profile__stats" id="sellerProfileStats">
+                <div class="p2p-seller-profile__stat-card">
+                  <div class="p2p-seller-profile__stat-label">Исполненные ордера за 30 дней</div>
+                  <div class="p2p-seller-profile__stat-main" id="sellerStatOrders30Line">—</div>
+                </div>
+                <div class="p2p-seller-profile__stat-card">
+                  <div class="p2p-seller-profile__stat-label">Все исполненные ордера</div>
+                  <div class="p2p-seller-profile__stat-main" id="sellerStatOrdersTotalLine">—</div>
+                  <div class="p2p-seller-profile__stat-sub" id="sellerStatOrdersSplit">
+                    <span class="p2p-seller-profile__stat-sub-part">Покупка 0</span><span class="p2p-seller-profile__stat-sub-part">Продажа —</span>
+                  </div>
+                </div>
+                <div class="p2p-seller-profile__stat-card">
+                  <div class="p2p-seller-profile__stat-label p2p-seller-profile__stat-label--row">
+                    <span>Исполнено за 30 дней</span>
+                    <img src="img/question-logo.svg" width="14" height="14" class="p2p-seller-profile__stat-info" alt="" aria-hidden="true">
+                  </div>
+                  <div class="p2p-seller-profile__stat-main" id="sellerStatCompletion">—</div>
+                </div>
+                <div class="p2p-seller-profile__stat-card">
+                  <div class="p2p-seller-profile__stat-label p2p-seller-profile__stat-label--row">
+                    <span>Высокий рейтинг %</span>
+                    <img src="img/question-logo.svg" width="14" height="14" class="p2p-seller-profile__stat-info" alt="" aria-hidden="true">
+                  </div>
+                  <div class="p2p-seller-profile__stat-main" id="sellerStatRating">—</div>
+                  <div class="p2p-seller-profile__stat-rating-row">
+                    <img src="img/like-logo.svg" width="16" height="15" alt="" aria-hidden="true">
+                    <span id="sellerStatLikes">0</span>
+                    <img src="img/dislike-logo.svg" width="17" height="16" alt="" class="p2p-seller-profile__stat-dislike" aria-hidden="true">
+                    <span id="sellerStatDislikes">0</span>
+                  </div>
+                </div>
+                <div class="p2p-seller-profile__stat-card">
+                  <div class="p2p-seller-profile__stat-label">Средн. время перевода</div>
+                  <div class="p2p-seller-profile__stat-main" id="sellerStatTransferLine">—</div>
+                </div>
+              </div>
+              <button type="button" class="p2p-seller-profile__stats-scroll" id="sellerProfileStatsScroll" aria-label="Больше данных">
+                <span class="p2p-seller-profile__stats-scroll-ico" aria-hidden="true">››</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="p2p-seller-profile__bottom-card">
+            <div class="p2p-seller-profile__tabs" role="tablist" aria-label="Разделы профиля продавца">
+              <button type="button" class="p2p-seller-profile__tab p2p-seller-profile__tab--active" role="tab" id="sellerTabAds" aria-selected="true" aria-controls="sellerPanelAds">Объявления</button>
+              <button type="button" class="p2p-seller-profile__tab" role="tab" id="sellerTabRating" aria-selected="false" aria-controls="sellerPanelRating">Оценка(<span id="sellerProfileReviewCount">0</span>)</button>
+            </div>
+
+            <div id="sellerPanelAds" class="p2p-seller-profile__tab-panel" role="tabpanel" aria-labelledby="sellerTabAds">
+              <section class="p2p-seller-profile__section">
+                <h2 class="p2p-seller-profile__section-head">
+                  <span class="p2p-seller-profile__section-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="2" y="2" width="20" height="20" rx="4" fill="#2ebd85"/>
+                      <path d="M12 6v5M9 10l3 3 3-3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                      <path d="M7 17h10" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  Купить у этого продавца
+                </h2>
+                <div class="p2p-seller-profile__table-wrap">
+                  <div class="p2p-seller-profile__mini-head">
+                    <span>Монета</span>
+                    <span>Цена</span>
+                    <span class="p2p-seller-profile__mini-head-limits">Доступно <span class="p2p-seller-profile__mini-head-sep" aria-hidden="true">|</span> Лимиты</span>
+                    <span>Способ оплаты</span>
+                    <span class="p2p-seller-profile__mini-head-action">Действие</span>
+                  </div>
+                  <div id="sellerProfileOfferRow" class="p2p-seller-profile__mini-row p2p-table__row"></div>
+                </div>
+              </section>
+            </div>
+
+            <div id="sellerPanelRating" class="p2p-seller-profile__tab-panel" role="tabpanel" aria-labelledby="sellerTabRating" hidden>
+              <div class="p2p-seller-reviews">
+                <p class="p2p-seller-reviews__summary">
+                  Текущий высокий рейтинг <span id="sellerReviewsHighPct">—</span>%
+                </p>
+                <div class="p2p-seller-reviews__filters" role="tablist" aria-label="Тип отзывов">
+                  <button type="button" class="p2p-seller-reviews__filter p2p-seller-reviews__filter--active" role="tab" data-review-filter="good" id="sellerReviewsTabGood" aria-selected="true">
+                    Хорошо <span id="sellerReviewsGoodCount">0</span>
+                  </button>
+                  <button type="button" class="p2p-seller-reviews__filter" role="tab" data-review-filter="bad" id="sellerReviewsTabBad" aria-selected="false">
+                    Плохо <span id="sellerReviewsBadCount">0</span>
+                  </button>
+                </div>
+                <div class="p2p-seller-reviews__list" id="sellerReviewsList" role="list"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p2p-order-room" id="p2pOrderRoom">
+          <div class="p2p-order-room__grid">
+            <div class="p2p-order-room__left">
+              <header class="p2p-order-room__status-head">
+                <h2 class="p2p-order-room__h1" id="p2pOrderStatusTitle">Ожидание оплаты</h2>
+                <p class="p2p-order-room__deadline">
+                  <span class="p2p-order-room__deadline-text">Примечание: если к концу указанного времени не нажать эту кнопку, ордер будет автоматически отменён. <span class="p2p-order-room__countdown" id="p2pOrderCountdown">00:15:00</span></span>
+                </p>
+              </header>
+              <div class="p2p-order-room__banner">
+                <span class="p2p-order-room__banner-icon" aria-hidden="true">!</span>
+                <p>Произведите оплату в соответствии с информацией об ордере. Иначе вы можете потерять активы или получить штраф за нарушение политики платформы. Ордер будет отменен после окончания обратного отсчета.</p>
+              </div>
+              <h3 class="p2p-order-room__trade-title" id="p2pOrderRoomTradeTitle"><span class="p2p-order-room__trade-verb">Покупка</span> <span class="p2p-order-room__trade-coin">USDT</span></h3>
+
+              <div class="p2p-order-room__stepper" role="list">
+                <div class="p2p-order-room__stepper-grid">
+                  <div class="p2p-order-room__rail-cell p2p-order-room__rail-cell--1" aria-hidden="true">
+                    <div class="p2p-order-room__step-bubble">1</div>
+                    <div class="p2p-order-room__rail-line"></div>
+                  </div>
+                  <div class="p2p-order-room__step-body p2p-order-room__step-body--1" role="listitem">
+                    <div class="p2p-order-room__step-head">
+                      <span class="p2p-order-room__step-label" id="p2pOrderStep1Title">Перевод через Наличные</span>
+                      <button type="button" class="p2p-order-room__trading-help">Проблемы с торговлей?</button>
+                    </div>
+                    <div class="p2p-order-room__step-panel">
+                      <div class="p2p-order-room__seller-box">
+                        <span class="p2p-order-room__seller-box-label">Имя продавца:</span>
+                        <span class="p2p-order-room__seller-box-name" id="p2pOrderSellerNick">—</span>
+                      </div>
+                      <dl class="p2p-order-room__dl p2p-order-room__dl--order-main">
+                        <div class="p2p-order-room__row">
+                          <dt>Сумма в фиате</dt>
+                          <dd>
+                            <span class="p2p-order-room__val p2p-order-room__val--fiat" id="p2pOrderFiat">—</span>
+                            <button type="button" class="p2p-order-room__copy" aria-label="Копировать сумму">
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 4v12a2 2 0 002 2h8a2 2 0 002-2V7.828a2 2 0 00-.586-1.414l-2.828-2.828A2 2 0 0015.172 3H10a2 2 0 00-2 2z" stroke="currentColor" stroke-width="1.4"/><path d="M6 8H5a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.4"/></svg>
+                            </button>
+                          </dd>
+                        </div>
+                        <div class="p2p-order-room__row">
+                          <dt>Фамилия Имя</dt>
+                          <dd>
+                            <span class="p2p-order-room__val p2p-order-room__val--legal" id="p2pOrderSellerLegal">—</span>
+                            <button type="button" class="p2p-order-room__copy" aria-label="Копировать ФИО">
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 4v12a2 2 0 002 2h8a2 2 0 002-2V7.828a2 2 0 00-.586-1.414l-2.828-2.828A2 2 0 0015.172 3H10a2 2 0 00-2 2z" stroke="currentColor" stroke-width="1.4"/><path d="M6 8H5a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.4"/></svg>
+                            </button>
+                          </dd>
+                        </div>
+                        <div class="p2p-order-room__row">
+                          <dt>Детали оплаты</dt>
+                          <dd>
+                            <span class="p2p-order-room__val" id="p2pOrderPayDetails">в чате</span>
+                            <button type="button" class="p2p-order-room__copy" aria-label="Копировать детали оплаты">
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 4v12a2 2 0 002 2h8a2 2 0 002-2V7.828a2 2 0 00-.586-1.414l-2.828-2.828A2 2 0 0015.172 3H10a2 2 0 00-2 2z" stroke="currentColor" stroke-width="1.4"/><path d="M6 8H5a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.4"/></svg>
+                            </button>
+                          </dd>
+                        </div>
+                        <div class="p2p-order-room__row">
+                          <dt>Ордер №</dt>
+                          <dd>
+                            <span class="p2p-order-room__val p2p-order-room__val--mono p2p-order-room__val--order-no" id="p2pOrderNo">—</span>
+                            <button type="button" class="p2p-order-room__copy" aria-label="Копировать номер ордера">
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 4v12a2 2 0 002 2h8a2 2 0 002-2V7.828a2 2 0 00-.586-1.414l-2.828-2.828A2 2 0 0015.172 3H10a2 2 0 00-2 2z" stroke="currentColor" stroke-width="1.4"/><path d="M6 8H5a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.4"/></svg>
+                            </button>
+                          </dd>
+                        </div>
+                      </dl>
+                      <div class="p2p-order-room__more">
+                        <button type="button" class="p2p-order-room__more-toggle" id="p2pOrderMoreToggle" aria-expanded="false">
+                          <span>Информация об ордере</span>
+                          <svg class="p2p-order-room__more-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="p2p-order-room__more-panel" id="p2pOrderMorePanel" hidden>
+                          <dl class="p2p-order-room__dl p2p-order-room__dl--compact p2p-order-room__dl--extra-meta">
+                            <div class="p2p-order-room__row">
+                              <dt>Цена</dt>
+                              <dd>
+                                <span class="p2p-order-room__val" id="p2pOrderPrice">—</span>
+                                <button type="button" class="p2p-order-room__copy" aria-label="Копировать цену">
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 4v12a2 2 0 002 2h8a2 2 0 002-2V7.828a2 2 0 00-.586-1.414l-2.828-2.828A2 2 0 0015.172 3H10a2 2 0 00-2 2z" stroke="currentColor" stroke-width="1.4"/><path d="M6 8H5a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.4"/></svg>
+                                </button>
+                              </dd>
+                            </div>
+                            <div class="p2p-order-room__row">
+                              <dt>Получаемое количество</dt>
+                              <dd>
+                                <span class="p2p-order-room__val" id="p2pOrderCrypto">—</span>
+                                <button type="button" class="p2p-order-room__copy" aria-label="Копировать количество">
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 4v12a2 2 0 002 2h8a2 2 0 002-2V7.828a2 2 0 00-.586-1.414l-2.828-2.828A2 2 0 0015.172 3H10a2 2 0 00-2 2z" stroke="currentColor" stroke-width="1.4"/><path d="M6 8H5a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.4"/></svg>
+                                </button>
+                              </dd>
+                            </div>
+                            <div class="p2p-order-room__row p2p-order-room__row--no-copy">
+                              <dt>Время ордера</dt>
+                              <dd><span class="p2p-order-room__val" id="p2pOrderTime">—</span></dd>
+                            </div>
+                          </dl>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="p2p-order-room__rail-cell p2p-order-room__rail-cell--2" aria-hidden="true">
+                    <div class="p2p-order-room__step-bubble">2</div>
+                  </div>
+                  <div class="p2p-order-room__step-body p2p-order-room__step-body--2" role="listitem">
+                    <div class="p2p-order-room__step-head p2p-order-room__step-head--plain">
+                      <span class="p2p-order-room__step-label">После оплаты нажмите кнопку, продавец выпустит крипто</span>
+                    </div>
+                    <p class="p2p-order-room__step-note">Следуйте инструкциям по оплате на странице ордера. Если они нечеткие, не
+                      совершайте платеж и отмените ордер.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p2p-order-room__cta-row">
+                <button type="button" class="p2p-order-room__btn p2p-order-room__btn--primary" id="p2pOrderBtnPaid">Платёж выполнен</button>
+                <button type="button" class="p2p-order-room__btn p2p-order-room__btn--ghost" id="p2pOrderBtnCancel">Отменить ордер</button>
+              </div>
+
+              <section class="p2p-order-cancelled" id="p2pOrderCancelledPanel" hidden aria-hidden="true">
+                <h3 class="p2p-order-cancelled__title">Ордер отменен</h3>
+                <p class="p2p-order-cancelled__desc" id="p2pOrderCancelledDesc">Ордер отменен.</p>
+                <div class="p2p-order-cancelled__warn">
+                  <span class="p2p-order-cancelled__warn-icon" aria-hidden="true">!</span>
+                  <p>Ордер отменен. Продавец сможет вывести монету в любое время.</p>
+                </div>
+                <p class="p2p-order-cancelled__trade" id="p2pOrderCancelledTrade"><span class="p2p-order-cancelled__trade-verb">Покупка</span> <span class="p2p-order-cancelled__trade-coin">USDT</span></p>
+                <dl class="p2p-order-cancelled__meta">
+                  <div class="p2p-order-cancelled__row">
+                    <dt>Сумма в фиате</dt>
+                    <dd id="p2pOrderCancelledFiat" class="p2p-order-cancelled__val p2p-order-cancelled__val--fiat">—</dd>
+                  </div>
+                  <div class="p2p-order-cancelled__row">
+                    <dt>Цена</dt>
+                    <dd id="p2pOrderCancelledPrice" class="p2p-order-cancelled__val">—</dd>
+                  </div>
+                  <div class="p2p-order-cancelled__row">
+                    <dt>Получаемое количество</dt>
+                    <dd id="p2pOrderCancelledCrypto" class="p2p-order-cancelled__val">—</dd>
+                  </div>
+                  <div class="p2p-order-cancelled__row">
+                    <dt>Ордер №</dt>
+                    <dd id="p2pOrderCancelledNo" class="p2p-order-cancelled__val">—</dd>
+                  </div>
+                  <div class="p2p-order-cancelled__row">
+                    <dt>Order Time</dt>
+                    <dd id="p2pOrderCancelledTime" class="p2p-order-cancelled__val">—</dd>
+                  </div>
+                </dl>
+                <a href="#" class="p2p-order-cancelled__dispute">Спор по заказу? ›</a>
+              </section>
+            </div>
+            <aside class="p2p-order-room__chat" aria-label="Чат с продавцом">
+              <div class="p2p-order-room__chat-head">
+                <div class="p2p-order-room__chat-seller">
+                  <div class="p2p-order-room__chat-avatar" id="p2pOrderChatAvatar">B</div>
+                  <div class="p2p-order-room__chat-seller-main">
+                    <div class="p2p-order-room__chat-name" id="p2pOrderChatName">—</div>
+                    <div class="p2p-order-room__chat-verified-row">
+                      <div class="p2p-order-room__chat-verified-info">
+                        <div class="p2p-order-room__chat-verified-line">
+                          <img class="p2p-order-room__chat-confirm-icon" src="img/confirm-logo.svg" width="18" height="22" alt="">
+                          <span class="p2p-order-room__chat-verified-prefix">Подтверждён :</span>
+                        </div>
+                        <span class="p2p-order-room__chat-verified-legal" id="p2pOrderChatVerifiedLegal">GUSTAVE KALONJI KALETA</span>
+                      </div>
+                      <a href="#" class="p2p-order-room__chat-complaint">Подать жалобу</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="p2p-order-room__chat-body" id="p2pOrderChatBody">
+                <div class="p2p-order-room__chat-ts" id="p2pOrderChatTs1">2026-04-05 17:28:44</div>
+                <div class="p2p-order-room__chat-system">
+                  <img src="img/megaphone-logo-2.svg" width="14" height="14" alt="" aria-hidden="true">
+                  <span id="p2pOrderChatSystemText">Вы успешно разместили ордер. Теперь необходимо произвести оплату.</span>
+                </div>
+              </div>
+              <div class="p2p-order-room__chat-input-wrap">
+                <input type="text" class="p2p-order-room__chat-input" id="p2pOrderChatInput" placeholder="Введите сообщение" autocomplete="off">
+                <button type="button" class="p2p-order-room__chat-icon-btn" id="p2pOrderChatAttach" aria-label="Прикрепить">
+                  <img src="img/plus-logo.svg" width="16" height="16" alt="" aria-hidden="true">
+                </button>
+                <button type="button" class="p2p-order-room__chat-icon-btn p2p-order-room__chat-icon-btn--send" id="p2pOrderChatSend" aria-label="Отправить">
+                  <img src="img/send-logo.svg" width="16" height="16" alt="" aria-hidden="true">
+                </button>
+                <input type="file" id="p2pOrderChatPhotoInput" class="p2p-order-room__chat-file-input" accept="image/*" aria-label="Добавить фото">
+              </div>
+            </aside>
+          </div>
+      </div>
+
+      </div>
+    </div>
+  </main>
+
+
+  <div class="p2p-more-data-overlay" id="sellerMoreDataModal" hidden aria-hidden="true">
+    <div class="p2p-more-data-modal" role="dialog" aria-modal="true" aria-labelledby="sellerMoreDataTitle">
+      <div class="p2p-more-data-modal__head">
+        <h2 class="p2p-more-data-modal__title" id="sellerMoreDataTitle">Больше данных</h2>
+        <button type="button" class="p2p-more-data-modal__close" id="sellerMoreDataClose" aria-label="Закрыть">&times;</button>
+      </div>
+      <div class="p2p-more-data-modal__body">
+        <div class="p2p-more-data-modal__inner" id="sellerMoreDataList"></div>
+      </div>
+      <div class="p2p-more-data-modal__footer">
+        <button type="button" class="p2p-more-data-modal__ok" id="sellerMoreDataOk">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="p2p-confirm-pay-overlay" id="p2pConfirmPayModal" hidden aria-hidden="true">
+    <div class="p2p-confirm-pay" role="dialog" aria-modal="true" aria-labelledby="p2pConfirmPayTitle">
+      <div class="p2p-confirm-pay__head">
+        <h2 class="p2p-confirm-pay__title" id="p2pConfirmPayTitle">Подтвердить платёж</h2>
+        <button type="button" class="p2p-confirm-pay__close" id="p2pConfirmPayClose" aria-label="Закрыть">&times;</button>
+      </div>
+      <div class="p2p-confirm-pay__body">
+        <div class="p2p-confirm-pay__warn">
+          <img class="p2p-confirm-pay__warn-ico" src="img/warning-logo.svg" width="18" height="18" alt="" aria-hidden="true">
+          <p>Во избежание заморозки аккаунта не нажимайте «Подтвердить платёж», пока не отправите деньги.</p>
+        </div>
+        <p class="p2p-confirm-pay__lead">Подтвердите, что совершили платёж по следующим реквизитам:</p>
+        <div class="p2p-confirm-pay__card">
+          <div class="p2p-confirm-pay__method" id="p2pConfirmPayMethod">Bank Transfer</div>
+          <dl class="p2p-confirm-pay__dl">
+            <div class="p2p-confirm-pay__row">
+              <dt>Фамилия Имя</dt>
+              <dd>
+                <span class="p2p-confirm-pay__val" id="p2pConfirmPayFullName">—</span>
+                <button type="button" class="p2p-confirm-pay__copy" data-copy-target="p2pConfirmPayFullName" aria-label="Копировать ФИО">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 4v12a2 2 0 002 2h8a2 2 0 002-2V7.828a2 2 0 00-.586-1.414l-2.828-2.828A2 2 0 0015.172 3H10a2 2 0 00-2 2z" stroke="currentColor" stroke-width="1.4"/><path d="M6 8H5a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.4"/></svg>
+                </button>
+              </dd>
+            </div>
+            <div class="p2p-confirm-pay__row">
+              <dt>Название банка</dt>
+              <dd>
+                <span class="p2p-confirm-pay__val" id="p2pConfirmPayBank">AB</span>
+                <button type="button" class="p2p-confirm-pay__copy" data-copy-target="p2pConfirmPayBank" aria-label="Копировать банк">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 4v12a2 2 0 002 2h8a2 2 0 002-2V7.828a2 2 0 00-.586-1.414l-2.828-2.828A2 2 0 0015.172 3H10a2 2 0 00-2 2z" stroke="currentColor" stroke-width="1.4"/><path d="M6 8H5a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.4"/></svg>
+                </button>
+              </dd>
+            </div>
+            <div class="p2p-confirm-pay__row">
+              <dt>Номер Карты</dt>
+              <dd>
+                <span class="p2p-confirm-pay__val p2p-confirm-pay__val--mono" id="p2pConfirmPayCard">000000000000</span>
+                <button type="button" class="p2p-confirm-pay__copy" data-copy-target="p2pConfirmPayCard" aria-label="Копировать номер карты">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 4v12a2 2 0 002 2h8a2 2 0 002-2V7.828a2 2 0 00-.586-1.414l-2.828-2.828A2 2 0 0015.172 3H10a2 2 0 00-2 2z" stroke="currentColor" stroke-width="1.4"/><path d="M6 8H5a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.4"/></svg>
+                </button>
+              </dd>
+            </div>
+            <div class="p2p-confirm-pay__row">
+              <dt>Номер Мобильного Телефона</dt>
+              <dd>
+                <span class="p2p-confirm-pay__val p2p-confirm-pay__val--mono" id="p2pConfirmPayPhone">79640000000</span>
+                <button type="button" class="p2p-confirm-pay__copy" data-copy-target="p2pConfirmPayPhone" aria-label="Копировать телефон">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 4v12a2 2 0 002 2h8a2 2 0 002-2V7.828a2 2 0 00-.586-1.414l-2.828-2.828A2 2 0 0015.172 3H10a2 2 0 00-2 2z" stroke="currentColor" stroke-width="1.4"/><path d="M6 8H5a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.4"/></svg>
+                </button>
+              </dd>
+            </div>
+          </dl>
+        </div>
+        <div class="p2p-confirm-pay__upload-block">
+          <div class="p2p-confirm-pay__upload-label">Загрузить сопутствующие документы</div>
+          <input type="file" class="p2p-confirm-pay__file" id="p2pConfirmPayFiles" accept="image/*" multiple aria-label="Загрузить изображения">
+          <button type="button" class="p2p-confirm-pay__upload-btn" id="p2pConfirmPayUploadBtn">
+            <span class="p2p-confirm-pay__upload-plus" aria-hidden="true">+</span> Загрузить
+          </button>
+          <p class="p2p-confirm-pay__upload-hint">Вы можете загрузить до 2 файлов, поддерживаются только изображения, ограничение размера файла: до 100 МБ.</p>
+          <p class="p2p-confirm-pay__file-list" id="p2pConfirmPayFileList" hidden></p>
+        </div>
+        <label class="p2p-confirm-pay__check">
+          <input type="checkbox" id="p2pConfirmPayCheck1">
+          <span>Я понимаю, что для совершения платежа необходимо выйти с платформы, и что Bybit не обрабатывает платёж автоматически</span>
+        </label>
+        <label class="p2p-confirm-pay__check">
+          <input type="checkbox" id="p2pConfirmPayCheck2">
+          <span>Я подтверждаю, что оплачу с аккаунта, в котором указано моё имя по паспорту</span>
+        </label>
+      </div>
+      <div class="p2p-confirm-pay__footer">
+        <button type="button" class="p2p-confirm-pay__submit" id="p2pConfirmPaySubmit" disabled>Подтвердить</button>
+        <button type="button" class="p2p-confirm-pay__cancel" id="p2pConfirmPayNotPaid">Не оплачено</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="p2p-not-paid-hint-overlay" id="p2pNotPaidHintModal" hidden aria-hidden="true">
+    <div class="p2p-not-paid-hint" role="dialog" aria-modal="true" aria-labelledby="p2pNotPaidHintTitle">
+      <div class="p2p-not-paid-hint__head">
+        <h2 class="p2p-not-paid-hint__title" id="p2pNotPaidHintTitle">При возникновении проблем с оплатой или других трудностей ордер можно отменить.</h2>
+        <button type="button" class="p2p-not-paid-hint__close" id="p2pNotPaidHintClose" aria-label="Закрыть">&times;</button>
+      </div>
+      <div class="p2p-not-paid-hint__cols">
+        <div class="p2p-not-paid-hint__col p2p-not-paid-hint__col--bad">
+          <div class="p2p-not-paid-hint__col-head">
+            <span class="p2p-not-paid-hint__ico p2p-not-paid-hint__ico--bad" aria-hidden="true">✕</span>
+            <span class="p2p-not-paid-hint__col-title">Что не нужно делать</span>
+          </div>
+          <ul class="p2p-not-paid-hint__list">
+            <li>Не отменяйте ордер после оплаты</li>
+            <li>Не совершайте оплату, если платежная информация сомнительная или неверная</li>
+            <li>Не верьте ложным обещаниям</li>
+          </ul>
+        </div>
+        <div class="p2p-not-paid-hint__col p2p-not-paid-hint__col--good">
+          <div class="p2p-not-paid-hint__col-head">
+            <span class="p2p-not-paid-hint__ico p2p-not-paid-hint__ico--good" aria-hidden="true">✓</span>
+            <span class="p2p-not-paid-hint__col-title">Что нужно делать</span>
+          </div>
+          <ul class="p2p-not-paid-hint__list">
+            <li>Выберите корректную причину отмены ордера</li>
+            <li>Общайтесь с продавцом только в чате по ордеру</li>
+            <li>Перед торговлей разберитесь в процессах и информации</li>
+          </ul>
+        </div>
+      </div>
+      <p class="p2p-not-paid-hint__note">• Если вы отмените 6 P2P-ордеров за день по причине со стороны покупателя, то не сможете размещать новые P2P-ордера в течение 24 часов.</p>
+      <div class="p2p-not-paid-hint__footer">
+        <button type="button" class="p2p-not-paid-hint__confirm" id="p2pNotPaidHintConfirm">Подтвердить</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="p2p-cancel-reason-overlay" id="p2pCancelReasonModal" hidden aria-hidden="true">
+    <div class="p2p-cancel-reason" role="dialog" aria-modal="true" aria-labelledby="p2pCancelReasonTitle">
+      <div class="p2p-cancel-reason__head">
+        <h2 class="p2p-cancel-reason__title" id="p2pCancelReasonTitle">Вы уверены, что хотите отменить ордер?</h2>
+        <button type="button" class="p2p-cancel-reason__close" id="p2pCancelReasonClose" aria-label="Закрыть">&times;</button>
+      </div>
+      <div class="p2p-cancel-reason__body">
+        <div class="p2p-cancel-reason__warn">
+          <span class="p2p-cancel-reason__warn-icon" aria-hidden="true">!</span>
+          <p>Выбрать причину отмены ордера можно только один раз. От этого зависит, будет ли ордер учитываться в расчетах процента выполнения.</p>
+        </div>
+
+        <p class="p2p-cancel-reason__lead">Выберите причину отмены.</p>
+
+        <section class="p2p-cancel-reason__group">
+          <h3 class="p2p-cancel-reason__group-title">Проблема на стороне покупателя</h3>
+          <div class="p2p-cancel-reason__options">
+            <label class="p2p-cancel-reason__option">
+              <input type="radio" name="p2pCancelReason" value="buyer_no_need">
+              <span>Этот ордер больше не нужен</span>
+            </label>
+            <label class="p2p-cancel-reason__option">
+              <input type="radio" name="p2pCancelReason" value="buyer_mismatch">
+              <span>Я не соответствовал(а) требованиям контрагента</span>
+            </label>
+            <label class="p2p-cancel-reason__option">
+              <input type="radio" name="p2pCancelReason" value="buyer_no_howto">
+              <span>Я не знал(а), как совершить платёж <a href="#" class="p2p-cancel-reason__guide-link">Посмотреть руководство</a></span>
+            </label>
+            <label class="p2p-cancel-reason__option">
+              <input type="radio" name="p2pCancelReason" value="buyer_other">
+              <span>Другое</span>
+            </label>
+          </div>
+        </section>
+
+        <section class="p2p-cancel-reason__group">
+          <h3 class="p2p-cancel-reason__group-title">Проблема на стороне продавца</h3>
+          <div class="p2p-cancel-reason__options">
+            <label class="p2p-cancel-reason__option">
+              <input type="radio" name="p2pCancelReason" value="seller_asked_cancel">
+              <span>Я совершил(а) платёж, но продавец просит отменить ордер</span>
+            </label>
+            <label class="p2p-cancel-reason__option">
+              <input type="radio" name="p2pCancelReason" value="seller_pay_method_invalid">
+              <span>Способ оплаты, предоставленный продавцом, отсутствует, недействителен или неполный</span>
+            </label>
+            <label class="p2p-cancel-reason__option">
+              <input type="radio" name="p2pCancelReason" value="seller_extra_fee">
+              <span>Контрагент требовал дополнительную плату</span>
+            </label>
+            <label class="p2p-cancel-reason__option">
+              <input type="radio" name="p2pCancelReason" value="seller_wrong_account_name">
+              <span>Продавец запросил оплату на аккаунт, который не совпадает с его/её настоящим именем</span>
+            </label>
+          </div>
+        </section>
+
+        <label class="p2p-cancel-reason__checkbox">
+          <input type="checkbox" id="p2pCancelReasonConfirmCheck">
+          <span>Я не оплатил средства продавцу / не получил возмещение от продавца</span>
+        </label>
+
+        <div class="p2p-cancel-reason__footer">
+          <button type="button" class="p2p-cancel-reason__btn p2p-cancel-reason__btn--yes" id="p2pCancelReasonYes" disabled>Да</button>
+          <button type="button" class="p2p-cancel-reason__btn p2p-cancel-reason__btn--no" id="p2pCancelReasonNo">Нет</button>
+        </div>
+
+        <p class="p2p-cancel-reason__complaint">Если вы хотите сообщить о вредоносных или мошеннических действиях, <a href="#">Пожаловаться</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="p2p-toast" id="p2pToast"></div>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" crossorigin="anonymous"></script>
+  <script>
+    if (typeof window.io === 'undefined') {
+      document.write('<script src="/socket.io/socket.io.js"><\\/script>');
+    }
+  </script>
+  <script src="main.js"></script>
+  <script>
+    (function () {
+      function forceOrderView() {
+        const market = document.getElementById('p2pMarketView');
+        const seller = document.getElementById('p2pSellerProfile');
+        const room = document.getElementById('p2pOrderRoom');
+        if (market) {
+          market.hidden = true;
+          market.setAttribute('aria-hidden', 'true');
+          market.style.display = 'none';
+        }
+        if (seller) {
+          seller.hidden = true;
+          seller.setAttribute('aria-hidden', 'true');
+          seller.style.display = 'none';
+        }
+        if (room) {
+          room.hidden = false;
+          room.removeAttribute('aria-hidden');
+          room.style.display = '';
+        }
+        document.querySelector('.p2p')?.classList.remove('p2p--seller-page');
+        document.documentElement.classList.remove('p2p-boot-profile');
+      }
+      forceOrderView();
+      window.addEventListener('load', forceOrderView);
+      setTimeout(forceOrderView, 0);
+      setTimeout(forceOrderView, 300);
+    })();
+  </script>
+</body>
+</html>
